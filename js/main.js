@@ -12,30 +12,15 @@
   /* ═══════════════════════════════════════════════════════
      ⚙️  НАСТРОЙКИ ФОРМЫ ЗАЯВОК
      ───────────────────────────────────────────────────────
-     ⚠️ ВАЖНО О БЕЗОПАСНОСТИ:
-     Токен бота, вставленный прямо здесь, будет виден любому,
-     кто откроет исходники страницы. Для серьёзного проекта
-     используйте прокси (Cloudflare Worker / Vercel / Netlify
-     Function) — см. инструкцию в README.
+     Токен бота спрятан в Cloudflare Worker — в исходниках
+     сайта его нет. Здесь только URL воркера (PROXY_URL).
 
-     Для быстрого старта (личный сайт, низкий риск):
-       1. Создайте бота у @BotFather → получите BOT_TOKEN
-       2. Напишите боту /start, затем узнайте свой chat_id
-          у бота @userinfobot (или через getUpdates)
-       3. Вставьте значения ниже.
+     CHAT_ID теперь тоже живёт в Cloudflare, а не тут.
      ═══════════════════════════════════════════════════════ */
   const TELEGRAM_CONFIG = {
-    // Пример: '7123456789:AAHxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-    BOT_TOKEN: 'ВСТАВЬТЕ_СЮДА_ТОКЕН_БОТА',
-
-    // Пример: '123456789' (ваш личный) или '-1001234567890' (канал/группа)
-    CHAT_ID: 'ВСТАВЬТЕ_СЮДА_CHAT_ID',
-
-    // Если используете прокси — впишите его URL, например:
-    // '/api/send' (Netlify/Vercel функция) или
-    // 'https://your-worker.workers.dev'
-    // Тогда BOT_TOKEN и CHAT_ID на клиенте не нужны.
-    PROXY_URL: ''
+    BOT_TOKEN: '',
+    CHAT_ID: '',
+    PROXY_URL: 'https://tpf-form.energylowinr.workers.dev'
   };
 
   /* ═══════════════════════════════════════════════════════
@@ -72,19 +57,16 @@
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', toggleMenu);
 
-    // Закрываем меню по клику на ссылку
     navLinks.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', closeMenu);
     });
 
-    // Закрываем по клику вне меню
     document.addEventListener('click', function (e) {
       if (!navLinks.classList.contains('is-open')) return;
       if (navLinks.contains(e.target) || navToggle.contains(e.target)) return;
       closeMenu();
     });
 
-    // Закрываем по Escape
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && navLinks.classList.contains('is-open')) {
         closeMenu();
@@ -92,7 +74,6 @@
       }
     });
 
-    // При переходе на десктоп — сбрасываем состояние
     window.addEventListener('resize', function () {
       if (window.innerWidth >= 768) closeMenu();
     });
@@ -108,7 +89,7 @@
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target); // анимируем один раз
+        observer.unobserve(entry.target);
       });
     }, {
       threshold: 0.12,
@@ -117,7 +98,6 @@
 
     revealElements.forEach(function (el) { revealObserver.observe(el); });
   } else {
-    // Фолбэк для старых браузеров
     revealElements.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
@@ -126,10 +106,6 @@
      ═══════════════════════════════════════════════════════ */
   const counters = document.querySelectorAll('.counter');
 
-  /**
-   * Плавно «докручивает» число от 0 до data-target.
-   * @param {HTMLElement} el — элемент счётчика
-   */
   function animateCounter(el) {
     const target   = parseFloat(el.dataset.target || '0');
     const decimals = parseInt(el.dataset.decimals || '0', 10);
@@ -139,14 +115,12 @@
 
     function tick(now) {
       const progress = Math.min((now - startTime) / duration, 1);
-      // easeOutCubic — быстро стартует, плавно тормозит
       const eased = 1 - Math.pow(1 - progress, 3);
       el.textContent = (target * eased).toFixed(decimals) + suffix;
 
       if (progress < 1) {
         requestAnimationFrame(tick);
       } else {
-        // Финальное точное значение
         el.textContent = target.toFixed(decimals) + suffix;
       }
     }
@@ -164,7 +138,6 @@
 
     counters.forEach(function (el) { counterObserver.observe(el); });
   } else {
-    // Фолбэк: сразу показываем итоговые значения
     counters.forEach(function (el) {
       const decimals = parseInt(el.dataset.decimals || '0', 10);
       el.textContent = parseFloat(el.dataset.target || '0').toFixed(decimals) + (el.dataset.suffix || '');
@@ -184,7 +157,6 @@
     button.addEventListener('click', function () {
       const isOpen = item.classList.contains('is-open');
 
-      // Закрываем все остальные (поведение «один открытый»)
       faqItems.forEach(function (other) {
         if (other === item) return;
         other.classList.remove('is-open');
@@ -194,7 +166,6 @@
         if (otherAns) otherAns.style.maxHeight = '0px';
       });
 
-      // Переключаем текущий
       if (isOpen) {
         item.classList.remove('is-open');
         button.setAttribute('aria-expanded', 'false');
@@ -207,7 +178,6 @@
     });
   });
 
-  // Пересчёт высоты открытого ответа при изменении размера окна
   window.addEventListener('resize', function () {
     const openItem = document.querySelector('.faq-item.is-open .faq-answer');
     if (openItem) {
@@ -250,7 +220,6 @@
     btn.addEventListener('click', function () {
       if (!serviceSelect) return;
       const value = btn.dataset.service;
-      // Ищем подходящий option (по значению или вхождению)
       const match = Array.from(serviceSelect.options).find(function (opt) {
         return opt.value === value || opt.text.toLowerCase().includes(value.toLowerCase());
       });
@@ -265,11 +234,6 @@
   const statusEl   = document.getElementById('formStatus');
   const submitBtn  = document.getElementById('submitBtn');
 
-  /**
-   * Показывает сообщение о статусе отправки.
-   * @param {string} text
-   * @param {'success'|'error'} type
-   */
   function setStatus(text, type) {
     if (!statusEl) return;
     statusEl.textContent = text;
@@ -277,9 +241,6 @@
     if (type) statusEl.classList.add('is-' + type);
   }
 
-  /**
-   * Помечает поле как ошибочное.
-   */
   function setFieldError(input, message) {
     const group = input.closest('.form-group');
     if (!group) return;
@@ -288,9 +249,6 @@
     if (errEl) errEl.textContent = message || '';
   }
 
-  /**
-   * Проверяет форму. Возвращает true, если всё валидно.
-   */
   function validateForm() {
     let valid = true;
 
@@ -298,7 +256,6 @@
     const contact = form.querySelector('#contact');
     const message = form.querySelector('#message');
 
-    // Имя
     if (!name.value.trim() || name.value.trim().length < 2) {
       setFieldError(name, 'Укажите имя (минимум 2 символа)');
       valid = false;
@@ -306,7 +263,6 @@
       setFieldError(name, '');
     }
 
-    // Контакт
     const contactValue = contact.value.trim();
     const contactOk = contactValue.length >= 5 &&
       (/@[\w.]{3,}/.test(contactValue) || /[\d\s()+-]{7,}/.test(contactValue));
@@ -317,7 +273,6 @@
       setFieldError(contact, '');
     }
 
-    // Описание
     if (!message.value.trim() || message.value.trim().length < 10) {
       setFieldError(message, 'Опишите задачу подробнее (минимум 10 символов)');
       valid = false;
@@ -329,7 +284,60 @@
   }
 
   /**
-   * Собирает текст сообщения для Telegram.
+   * Отправляет заявку в Telegram.
+   * Если задан PROXY_URL — через Cloudflare Worker (рекомендуется).
+   * Иначе — напрямую в Telegram Bot API по BOT_TOKEN + CHAT_ID.
+   */
+  async function sendLead(data) {
+    // ─── Вариант А: через прокси (Cloudflare Worker) ───
+    if (TELEGRAM_CONFIG.PROXY_URL) {
+      const res = await fetch(TELEGRAM_CONFIG.PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    data.name,
+          contact: data.contact,
+          service: data.service,
+          message: data.message
+        })
+      });
+
+      const json = await res.json().catch(function () { return {}; });
+
+      if (!res.ok || json.ok === false) {
+        throw new Error(json.error || ('Ошибка сервера: ' + res.status));
+      }
+      return json;
+    }
+
+    // ─── Вариант Б: напрямую в Telegram ───
+    if (!TELEGRAM_CONFIG.BOT_TOKEN || TELEGRAM_CONFIG.BOT_TOKEN.indexOf('ВСТАВЬТЕ') === 0) {
+      throw new Error('CONFIG_MISSING');
+    }
+    if (!TELEGRAM_CONFIG.CHAT_ID || TELEGRAM_CONFIG.CHAT_ID.indexOf('ВСТАВЬТЕ') === 0) {
+      throw new Error('CONFIG_MISSING');
+    }
+
+    const text = buildMessage(data);
+    const chatIds = TELEGRAM_CONFIG.CHAT_ID
+      .split(',')
+      .map(function (id) { return id.trim(); })
+      .filter(Boolean);
+
+    const results = await Promise.allSettled(
+      chatIds.map(function (id) { return sendToOne(id, text); })
+    );
+
+    const failed = results.filter(function (r) { return r.status === 'rejected'; });
+    if (failed.length === results.length) {
+      throw new Error(failed[0].reason ? failed[0].reason.message : 'Ошибка отправки');
+    }
+
+    return { ok: true };
+  }
+
+  /**
+   * Собирает текст сообщения для Telegram (для варианта Б).
    */
   function buildMessage(data) {
     return [
@@ -347,49 +355,16 @@
   }
 
   /**
-   * Экранирует HTML-спецсимволы (Telegram parse_mode: HTML).
+   * Отправляет одно сообщение в Telegram Bot API (для варианта Б).
    */
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-  }
-
-  /**
-   * Отправляет данные в Telegram Bot API.
-   * Если задан PROXY_URL — шлём на прокси, иначе напрямую.
-   */
-  async function sendToTelegram(text) {
-    // ─── Вариант А: через прокси (рекомендуется) ───
-    if (TELEGRAM_CONFIG.PROXY_URL) {
-      const res = await fetch(TELEGRAM_CONFIG.PROXY_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name:      form.querySelector('#name').value.trim(),
-          contact:   form.querySelector('#contact').value.trim(),
-          service:   form.querySelector('#service').value,
-          message:   form.querySelector('#message').value.trim(),
-          text:      text
-        })
-      });
-      if (!res.ok) throw new Error('Прокси вернул ошибку: ' + res.status);
-      return res.json().catch(function () { return {}; });
-    }
-
-    // ─── Вариант Б: напрямую в Telegram Bot API ───
-    if (TELEGRAM_CONFIG.BOT_TOKEN === 'ВСТАВЬТЕ_СЮДА_ТОКЕН_БОТА') {
-      throw new Error('CONFIG_MISSING');
-    }
-
+  async function sendToOne(chatId, text) {
     const url = 'https://api.telegram.org/bot' + TELEGRAM_CONFIG.BOT_TOKEN + '/sendMessage';
 
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        chat_id: TELEGRAM_CONFIG.CHAT_ID,
+        chat_id: chatId,
         text: text,
         parse_mode: 'HTML',
         disable_web_page_preview: true
@@ -403,11 +378,18 @@
     return json;
   }
 
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
   if (form) {
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      // Антиспам: если honeypot заполнен — тихо игнорируем
+      // Honeypot
       const honeypot = form.querySelector('#company');
       if (honeypot && honeypot.value) return;
 
@@ -418,7 +400,6 @@
         return;
       }
 
-      // Блокируем кнопку на время отправки
       const originalText = submitBtn.textContent;
       submitBtn.disabled = true;
       submitBtn.textContent = 'Отправляю…';
@@ -432,13 +413,11 @@
       };
 
       try {
-        await sendToTelegram(buildMessage(data));
+        await sendLead(data);
 
-        // Успех
         setStatus('✅ Заявка отправлена — отвечу в течение часа. Спасибо!', 'success');
         form.reset();
 
-        // Плавно прокручиваем к сообщению об успехе
         if (statusEl) {
           statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
@@ -463,7 +442,6 @@
       }
     });
 
-    // Снимаем ошибку при вводе
     form.querySelectorAll('input, textarea').forEach(function (input) {
       input.addEventListener('input', function () {
         setFieldError(input, '');
@@ -473,7 +451,6 @@
 
   /* ═══════════════════════════════════════════════════════
      9. ПЛАВНЫЙ СКРОЛЛ С УЧЁТОМ ВЫСОТЫ НАВБАРА
-        (для браузеров без поддержки scroll-margin-top)
      ═══════════════════════════════════════════════════════ */
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
@@ -492,7 +469,6 @@
         behavior: 'smooth'
       });
 
-      // Обновляем URL без прыжка
       if (history.pushState) {
         history.pushState(null, '', href);
       }
@@ -500,7 +476,7 @@
   });
 
   /* ═══════════════════════════════════════════════════════
-     10. ГОД В ФУТЕРЕ (автоактуализация)
+     10. ГОД В ФУТЕРЕ
      ═══════════════════════════════════════════════════════ */
   const yearEl = document.querySelector('.footer-bottom p');
   if (yearEl) {
