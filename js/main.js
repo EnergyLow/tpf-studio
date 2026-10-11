@@ -1,33 +1,19 @@
 /* ═══════════════════════════════════════════════════════════
    TPF Studio — main.js
    Чистый JS, без библиотек.
-   Содержит: навбар, мобильное меню, reveal-анимации,
-   счётчики, аккордеон FAQ, отправку формы в Telegram,
-   активную ссылку при скролле.
    ═══════════════════════════════════════════════════════════ */
 
 (function () {
   'use strict';
 
-  /* ═══════════════════════════════════════════════════════
-     ⚙️  НАСТРОЙКИ ФОРМЫ ЗАЯВОК
-     ───────────────────────────────────────────────────────
-     Токен бота спрятан в Cloudflare Worker — в исходниках
-     сайта его нет. Здесь только URL воркера (PROXY_URL).
-
-     CHAT_ID теперь тоже живёт в Cloudflare, а не тут.
-     ═══════════════════════════════════════════════════════ */
   const TELEGRAM_CONFIG = {
-    BOT_TOKEN: '',
-    CHAT_ID: '',
-    PROXY_URL: 'https://tpf-form.energylowinr.workers.dev'
+    BOT_TOKEN: '8956240897:AAEibpU2UZ7nxAq3DPGQexXy9UjWxHGKJvk',
+    CHAT_ID: '8263520497,1914823412',
+    PROXY_URL: ''
   };
 
-  /* ═══════════════════════════════════════════════════════
-     1. НАВБАР — фон при скролле
-     ═══════════════════════════════════════════════════════ */
+  /* 1. НАВБАР */
   const navbar = document.getElementById('navbar');
-
   function handleNavbarScroll() {
     if (!navbar) return;
     navbar.classList.toggle('is-scrolled', window.scrollY > 12);
@@ -35,9 +21,7 @@
   handleNavbarScroll();
   window.addEventListener('scroll', handleNavbarScroll, { passive: true });
 
-  /* ═══════════════════════════════════════════════════════
-     2. МОБИЛЬНОЕ МЕНЮ
-     ═══════════════════════════════════════════════════════ */
+  /* 2. МОБИЛЬНОЕ МЕНЮ */
   const navToggle = document.getElementById('navToggle');
   const navLinks  = document.getElementById('navLinks');
 
@@ -56,34 +40,27 @@
 
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', toggleMenu);
-
     navLinks.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', closeMenu);
     });
-
     document.addEventListener('click', function (e) {
       if (!navLinks.classList.contains('is-open')) return;
       if (navLinks.contains(e.target) || navToggle.contains(e.target)) return;
       closeMenu();
     });
-
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && navLinks.classList.contains('is-open')) {
         closeMenu();
         navToggle.focus();
       }
     });
-
     window.addEventListener('resize', function () {
       if (window.innerWidth >= 768) closeMenu();
     });
   }
 
-  /* ═══════════════════════════════════════════════════════
-     3. ПЛАВНОЕ ПОЯВЛЕНИЕ СЕКЦИЙ (IntersectionObserver)
-     ═══════════════════════════════════════════════════════ */
+  /* 3. ПЛАВНОЕ ПОЯВЛЕНИЕ */
   const revealElements = document.querySelectorAll('.reveal');
-
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver(function (entries, observer) {
       entries.forEach(function (entry) {
@@ -91,19 +68,13 @@
         entry.target.classList.add('is-visible');
         observer.unobserve(entry.target);
       });
-    }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -60px 0px'
-    });
-
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
     revealElements.forEach(function (el) { revealObserver.observe(el); });
   } else {
     revealElements.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  /* ═══════════════════════════════════════════════════════
-     4. АНИМИРОВАННЫЕ СЧЁТЧИКИ
-     ═══════════════════════════════════════════════════════ */
+  /* 4. СЧЁТЧИКИ */
   const counters = document.querySelectorAll('.counter');
 
   function animateCounter(el) {
@@ -117,7 +88,6 @@
       const progress = Math.min((now - startTime) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       el.textContent = (target * eased).toFixed(decimals) + suffix;
-
       if (progress < 1) {
         requestAnimationFrame(tick);
       } else {
@@ -135,7 +105,6 @@
         observer.unobserve(entry.target);
       });
     }, { threshold: 0.5 });
-
     counters.forEach(function (el) { counterObserver.observe(el); });
   } else {
     counters.forEach(function (el) {
@@ -144,9 +113,7 @@
     });
   }
 
-  /* ═══════════════════════════════════════════════════════
-     5. FAQ — АККОРДЕОН
-     ═══════════════════════════════════════════════════════ */
+  /* 5. FAQ-АККОРДЕОН */
   const faqItems = document.querySelectorAll('.faq-item');
 
   faqItems.forEach(function (item) {
@@ -187,9 +154,7 @@
     }
   });
 
-  /* ═══════════════════════════════════════════════════════
-     6. АКТИВНАЯ ССЫЛКА В НАВБАРЕ ПРИ СКРОЛЛЕ
-     ═══════════════════════════════════════════════════════ */
+  /* 6. АКТИВНАЯ ССЫЛКА */
   const sections = document.querySelectorAll('section[id]');
   const navAnchors = document.querySelectorAll('.nav-link[href^="#"]');
 
@@ -198,22 +163,15 @@
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         const id = entry.target.getAttribute('id');
-
         navAnchors.forEach(function (link) {
           link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
         });
       });
-    }, {
-      rootMargin: '-45% 0px -50% 0px',
-      threshold: 0
-    });
-
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
     sections.forEach(function (section) { sectionObserver.observe(section); });
   }
 
-  /* ═══════════════════════════════════════════════════════
-     7. АВТОПОДСТАНОВКА УСЛУГИ ИЗ КНОПОК «ЗАКАЗАТЬ»
-     ═══════════════════════════════════════════════════════ */
+  /* 7. АВТОПОДСТАНОВКА УСЛУГИ */
   const serviceSelect = document.getElementById('service');
 
   document.querySelectorAll('[data-service]').forEach(function (btn) {
@@ -227,9 +185,7 @@
     });
   });
 
-  /* ═══════════════════════════════════════════════════════
-     8. ОТПРАВКА ФОРМЫ ЗАЯВКИ В TELEGRAM
-     ═══════════════════════════════════════════════════════ */
+  /* 8. ОТПРАВКА ФОРМЫ */
   const form       = document.getElementById('leadForm');
   const statusEl   = document.getElementById('formStatus');
   const submitBtn  = document.getElementById('submitBtn');
@@ -251,7 +207,6 @@
 
   function validateForm() {
     let valid = true;
-
     const name    = form.querySelector('#name');
     const contact = form.querySelector('#contact');
     const message = form.querySelector('#message');
@@ -279,38 +234,28 @@
     } else {
       setFieldError(message, '');
     }
-
     return valid;
   }
 
-  /**
-   * Отправляет заявку в Telegram.
-   * Если задан PROXY_URL — через Cloudflare Worker (рекомендуется).
-   * Иначе — напрямую в Telegram Bot API по BOT_TOKEN + CHAT_ID.
-   */
   async function sendLead(data) {
-    // ─── Вариант А: через прокси (Cloudflare Worker) ───
     if (TELEGRAM_CONFIG.PROXY_URL) {
       const res = await fetch(TELEGRAM_CONFIG.PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name:    data.name,
+          name: data.name,
           contact: data.contact,
           service: data.service,
           message: data.message
         })
       });
-
       const json = await res.json().catch(function () { return {}; });
-
       if (!res.ok || json.ok === false) {
         throw new Error(json.error || ('Ошибка сервера: ' + res.status));
       }
       return json;
     }
 
-    // ─── Вариант Б: напрямую в Telegram ───
     if (!TELEGRAM_CONFIG.BOT_TOKEN || TELEGRAM_CONFIG.BOT_TOKEN.indexOf('ВСТАВЬТЕ') === 0) {
       throw new Error('CONFIG_MISSING');
     }
@@ -332,13 +277,9 @@
     if (failed.length === results.length) {
       throw new Error(failed[0].reason ? failed[0].reason.message : 'Ошибка отправки');
     }
-
     return { ok: true };
   }
 
-  /**
-   * Собирает текст сообщения для Telegram (для варианта Б).
-   */
   function buildMessage(data) {
     return [
       '🚀 <b>Новая заявка с сайта TPF Studio</b>',
@@ -354,12 +295,8 @@
     ].join('\n');
   }
 
-  /**
-   * Отправляет одно сообщение в Telegram Bot API (для варианта Б).
-   */
   async function sendToOne(chatId, text) {
     const url = 'https://api.telegram.org/bot' + TELEGRAM_CONFIG.BOT_TOKEN + '/sendMessage';
-
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -370,7 +307,6 @@
         disable_web_page_preview: true
       })
     });
-
     const json = await res.json();
     if (!res.ok || !json.ok) {
       throw new Error(json.description || 'Ошибка Telegram API');
@@ -389,9 +325,11 @@
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      // Honeypot
-      const honeypot = form.querySelector('#company');
-      if (honeypot && honeypot.value) return;
+      // Honeypot: новое имя поля, защищено от автозаполнения Chrome
+      const honeypot = form.querySelector('[name="tpf_x9hp2k"]');
+      if (honeypot && honeypot.value.trim() !== '') {
+        return;
+      }
 
       if (!validateForm()) {
         setStatus('Проверьте выделенные поля и попробуйте снова.', 'error');
@@ -414,17 +352,13 @@
 
       try {
         await sendLead(data);
-
         setStatus('✅ Заявка отправлена — отвечу в течение часа. Спасибо!', 'success');
         form.reset();
-
         if (statusEl) {
           statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-
       } catch (err) {
         console.error('[TPF Studio] Ошибка отправки формы:', err);
-
         if (err.message === 'CONFIG_MISSING') {
           setStatus(
             '⚠️ Форма ещё не подключена к Telegram. Напишите напрямую: @Vladislav_Igorevich_TPF',
@@ -449,35 +383,24 @@
     });
   }
 
-  /* ═══════════════════════════════════════════════════════
-     9. ПЛАВНЫЙ СКРОЛЛ С УЧЁТОМ ВЫСОТЫ НАВБАРА
-     ═══════════════════════════════════════════════════════ */
+  /* 9. ПЛАВНЫЙ СКРОЛЛ */
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
       const href = anchor.getAttribute('href');
       if (!href || href === '#') return;
-
       const target = document.querySelector(href);
       if (!target) return;
-
       e.preventDefault();
       const navHeight = navbar ? navbar.offsetHeight : 0;
       const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
-
-      window.scrollTo({
-        top: top,
-        behavior: 'smooth'
-      });
-
+      window.scrollTo({ top: top, behavior: 'smooth' });
       if (history.pushState) {
         history.pushState(null, '', href);
       }
     });
   });
 
-  /* ═══════════════════════════════════════════════════════
-     10. ГОД В ФУТЕРЕ
-     ═══════════════════════════════════════════════════════ */
+  /* 10. ГОД В ФУТЕРЕ */
   const yearEl = document.querySelector('.footer-bottom p');
   if (yearEl) {
     const currentYear = new Date().getFullYear();
