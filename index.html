@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0A0A0F">
+<meta name="theme-color" content="#FBFAF7">
 
-<!-- ═══════════════ SEO ═══════════════ -->
 <title>TPF Studio — сайты и Telegram-боты под ключ за 1,5 дня</title>
 <meta name="description" content="TPF Studio — соло-разработка сайтов, Telegram-ботов и дизайна под ключ. От идеи до запуска: адаптив, Supabase, уведомления в Telegram, хостинг. Средний срок лендинга — 1,5 дня.">
 <meta name="keywords" content="разработка сайтов, telegram бот, лендинг под ключ, supabase, веб-разработка, TPF Studio">
@@ -23,13 +22,25 @@
 <meta name="twitter:title" content="TPF Studio — сайты и Telegram-боты под ключ">
 <meta name="twitter:description" content="Соло-разработка от идеи до запуска. Средний срок лендинга — 1,5 дня.">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%237C3AED'/><text x='50' y='68' font-size='46' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>T</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%234F46E5'/><text x='50' y='68' font-size='46' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>T</text></svg>">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css">
+
+<script>
+  // Антимигание: применяем тему сразу, до отрисовки
+  (function() {
+    try {
+      const t = localStorage.getItem('tpf-theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      const l = localStorage.getItem('tpf-lang');
+      if (l) document.documentElement.setAttribute('lang', l);
+    } catch (e) {}
+  })();
+</script>
 
 <script type="application/ld+json">
 {
@@ -52,17 +63,7 @@
       "description": "Разработка сайтов, Telegram-ботов и дизайна под ключ.",
       "provider": { "@id": "https://energylow.github.io/#person" },
       "areaServed": { "@type": "Country", "name": "Россия" },
-      "priceRange": "5000–60000 ₽",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Услуги TPF Studio",
-        "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Разработка сайтов" }, "price": "15000", "priceCurrency": "RUB" },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Telegram-боты" }, "price": "10000", "priceCurrency": "RUB" },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Дизайн" }, "price": "5000", "priceCurrency": "RUB" },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Интеграции и автоматизация" }, "price": "7000", "priceCurrency": "RUB" }
-        ]
-      }
+      "priceRange": "5000–60000 ₽"
     }
   ]
 }
@@ -71,9 +72,6 @@
 
 <body>
 
-<!-- ══════════════════════════════════════
-     1. НАВБАР
-══════════════════════════════════════ -->
 <header class="navbar" id="navbar">
   <div class="container nav-inner">
 
@@ -83,15 +81,109 @@
     </a>
 
     <nav class="nav-links" id="navLinks" aria-label="Основная навигация">
-      <a href="#services" class="nav-link">Услуги</a>
-      <a href="#packages" class="nav-link">Пакеты</a>
-      <a href="#cases" class="nav-link">Кейсы</a>
-      <a href="#process" class="nav-link">Как работаю</a>
-      <a href="#faq" class="nav-link">FAQ</a>
-      <a href="#contact" class="nav-link nav-link--mobile-cta">Обсудить проект</a>
+      <a href="#services" class="nav-link" data-i18n="nav.services">Услуги</a>
+      <a href="#packages" class="nav-link" data-i18n="nav.packages">Пакеты</a>
+      <a href="#cases" class="nav-link" data-i18n="nav.cases">Кейсы</a>
+      <a href="#reviews" class="nav-link" data-i18n="nav.reviews">Отзывы</a>
+      <a href="#process" class="nav-link" data-i18n="nav.process">Как работаю</a>
+      <a href="#faq" class="nav-link" data-i18n="nav.faq">FAQ</a>
+      <a href="#contact" class="nav-link nav-link--mobile-cta" data-i18n="nav.cta">Обсудить проект</a>
     </nav>
 
-    <a href="#contact" class="btn btn--primary btn--sm nav-cta">Обсудить проект</a>
+    <div class="nav-controls">
+
+      <!-- Языки: планета + dropdown -->
+      <div class="lang" id="langRoot">
+        <button type="button" class="lang-trigger" id="langTrigger"
+                aria-label="Выбрать язык"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+                aria-controls="langMenu">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>
+          </svg>
+          <span class="lang-current" id="langCurrent">RU</span>
+        </button>
+
+        <div class="lang-menu" id="langMenu" role="listbox" aria-label="Выбор языка" hidden>
+          <div class="lang-group">
+            <span class="lang-group-title">Основные / Main</span>
+            <button type="button" class="lang-item is-active" data-lang="ru" role="option" aria-selected="true">
+              <span class="lang-flag">🇷🇺</span>
+              <span class="lang-name">Русский</span>
+              <span class="lang-code">RU</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="en" role="option" aria-selected="false">
+              <span class="lang-flag">🇬🇧</span>
+              <span class="lang-name">English</span>
+              <span class="lang-code">EN</span>
+            </button>
+          </div>
+
+          <div class="lang-group">
+            <span class="lang-group-title">Другие / Others</span>
+            <button type="button" class="lang-item" data-lang="uk" role="option" aria-selected="false">
+              <span class="lang-flag">🇺🇦</span>
+              <span class="lang-name">Українська</span>
+              <span class="lang-code">UK</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="pl" role="option" aria-selected="false">
+              <span class="lang-flag">🇵🇱</span>
+              <span class="lang-name">Polski</span>
+              <span class="lang-code">PL</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="de" role="option" aria-selected="false">
+              <span class="lang-flag">🇩🇪</span>
+              <span class="lang-name">Deutsch</span>
+              <span class="lang-code">DE</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="fr" role="option" aria-selected="false">
+              <span class="lang-flag">🇫🇷</span>
+              <span class="lang-name">Français</span>
+              <span class="lang-code">FR</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="es" role="option" aria-selected="false">
+              <span class="lang-flag">🇪🇸</span>
+              <span class="lang-name">Español</span>
+              <span class="lang-code">ES</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="tr" role="option" aria-selected="false">
+              <span class="lang-flag">🇹🇷</span>
+              <span class="lang-name">Türkçe</span>
+              <span class="lang-code">TR</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="zh" role="option" aria-selected="false">
+              <span class="lang-flag">🇨🇳</span>
+              <span class="lang-name">中文</span>
+              <span class="lang-code">ZH</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="ja" role="option" aria-selected="false">
+              <span class="lang-flag">🇯🇵</span>
+              <span class="lang-name">日本語</span>
+              <span class="lang-code">JA</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="ko" role="option" aria-selected="false">
+              <span class="lang-flag">🇰🇷</span>
+              <span class="lang-name">한국어</span>
+              <span class="lang-code">KO</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Один переключатель темы -->
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/>
+        </svg>
+      </button>
+
+    </div>
 
     <button class="nav-toggle" id="navToggle" aria-label="Открыть меню"
             aria-expanded="false" aria-controls="navLinks">
@@ -104,9 +196,6 @@
 
 <main>
 
-<!-- ══════════════════════════════════════
-     2. HERO
-══════════════════════════════════════ -->
 <section class="hero" id="hero">
   <div class="hero-bg" aria-hidden="true">
     <div class="hero-grid"></div>
@@ -119,43 +208,43 @@
 
     <span class="pill reveal">
       <span class="pill-dot" aria-hidden="true"></span>
-      Свободен для новых проектов
+      <span data-i18n="hero.pill">Свободен для новых проектов</span>
     </span>
 
     <h1 class="hero-title reveal" style="--d:.08s">
-      Создаю сайты и Telegram-ботов<br>
-      <span class="grad-text">под ключ за 1,5 дня</span>
+      <span data-i18n="hero.title1">Создаю сайты и Telegram-ботов</span><br>
+      <span class="grad-text" data-i18n="hero.title2">под ключ за 1,5 дня</span>
     </h1>
 
-    <p class="hero-sub reveal" style="--d:.16s">
+    <p class="hero-sub reveal" style="--d:.16s" data-i18n="hero.sub">
       TPF Studio — соло-разработка от идеи до запуска.
       Без посредников, без затягивания сроков, с гарантией.
     </p>
 
     <div class="hero-actions reveal" style="--d:.24s">
       <a href="#contact" class="btn btn--primary btn--lg">
-        Обсудить проект
+        <span data-i18n="hero.btn1">Обсудить проект</span>
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a href="#cases" class="btn btn--ghost btn--lg">Посмотреть кейсы</a>
+      <a href="#cases" class="btn btn--ghost btn--lg" data-i18n="hero.btn2">Посмотреть кейсы</a>
     </div>
 
     <dl class="stats reveal" style="--d:.32s">
       <div class="stat">
         <dt class="stat-value"><span class="counter" data-target="3.5" data-decimals="1">0</span></dt>
-        <dd class="stat-label">года опыта</dd>
+        <dd class="stat-label" data-i18n="stats.experience">года опыта</dd>
       </div>
       <div class="stat">
         <dt class="stat-value"><span class="counter" data-target="4">0</span></dt>
-        <dd class="stat-label">проекта под ключ</dd>
+        <dd class="stat-label" data-i18n="stats.projects">проекта под ключ</dd>
       </div>
       <div class="stat">
         <dt class="stat-value"><span class="counter" data-target="1.5" data-decimals="1">0</span></dt>
-        <dd class="stat-label">дня средний срок</dd>
+        <dd class="stat-label" data-i18n="stats.days">дня средний срок</dd>
       </div>
       <div class="stat">
         <dt class="stat-value"><span class="counter" data-target="100" data-suffix="%">0</span></dt>
-        <dd class="stat-label">под ключ</dd>
+        <dd class="stat-label" data-i18n="stats.turnkey">под ключ</dd>
       </div>
     </dl>
 
@@ -163,64 +252,54 @@
 </section>
 
 
-<!-- ══════════════════════════════════════
-     3. ОБО МНЕ
-══════════════════════════════════════ -->
 <section class="section" id="about">
   <div class="container">
-
     <div class="about-grid">
 
       <div class="about-card reveal">
-        <div class="avatar" aria-hidden="true">
-          <span>В</span>
-        </div>
+        <div class="avatar" aria-hidden="true"><span>В</span></div>
         <div class="about-meta">
-          <strong>Владислав</strong>
-          <span>Разработчик &amp; основатель TPF Studio</span>
+          <strong data-i18n="about.name">Владислав</strong>
+          <span data-i18n="about.role">Разработчик &amp; основатель TPF Studio</span>
           <span class="about-loc">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            Луганск · удалённо по всей России
+            <span data-i18n="about.location">Луганск · удалённо по всей России</span>
           </span>
         </div>
       </div>
 
       <div class="about-text reveal" style="--d:.1s">
-        <span class="eyebrow">// обо мне</span>
-        <h2 class="section-title">Один разработчик вместо целой команды</h2>
-        <p>
+        <span class="eyebrow">// <span data-i18n="about.eyebrow">обо мне</span></span>
+        <h2 class="section-title" data-i18n="about.title">Один разработчик вместо целой команды</h2>
+        <p data-i18n="about.p1">
           Меня зовут Владислав. Я разработчик и основатель TPF Studio из Луганска,
           работаю удалённо по всей России. Делаю сайты и Telegram-ботов под ключ:
           беру задачу целиком — от брифа до запуска, БД, уведомлений в Telegram и хостинга.
         </p>
-        <p>
+        <p data-i18n="about.p2">
           За 3,5 года реализовал проекты для бьюти-сферы и HoReCa. Клиенту не нужно
           искать дизайнера, верстальщика и бэкендера — всё делаю сам.
         </p>
 
         <ul class="badges" aria-label="Ключевые особенности работы">
-          <li class="badge">Удалённо</li>
-          <li class="badge">Работаю по договору</li>
-          <li class="badge">Без предоплаты за воздух</li>
+          <li class="badge" data-i18n="about.badge1">Удалённо</li>
+          <li class="badge" data-i18n="about.badge2">Работаю по договору</li>
+          <li class="badge" data-i18n="about.badge3">Без предоплаты за воздух</li>
         </ul>
       </div>
 
     </div>
-
   </div>
 </section>
 
 
-<!-- ══════════════════════════════════════
-     4. УСЛУГИ
-══════════════════════════════════════ -->
 <section class="section section--alt" id="services">
   <div class="container">
 
     <div class="section-head reveal">
-      <span class="eyebrow">// услуги</span>
-      <h2 class="section-title">Что я делаю</h2>
-      <p class="section-sub">Полный цикл: дизайн, вёрстка, бэкенд, база данных, боты и деплой. Цена фиксируется до старта.</p>
+      <span class="eyebrow">// <span data-i18n="services.eyebrow">услуги</span></span>
+      <h2 class="section-title" data-i18n="services.title">Что я делаю</h2>
+      <p class="section-sub" data-i18n="services.sub">Полный цикл: дизайн, вёрстка, бэкенд, база данных, боты и деплой. Цена фиксируется до старта.</p>
     </div>
 
     <div class="services-grid">
@@ -229,11 +308,11 @@
         <div class="service-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         </div>
-        <h3 class="service-title">Разработка сайтов</h3>
-        <p class="service-desc">Лендинги, сайты кафе и салонов, корпоративные, магазины. Адаптив, SEO, аналитика, хостинг.</p>
+        <h3 class="service-title" data-i18n="s1.title">Разработка сайтов</h3>
+        <p class="service-desc" data-i18n="s1.desc">Лендинги, сайты кафе и салонов, корпоративные, магазины. Адаптив, SEO, аналитика, хостинг.</p>
         <div class="service-foot">
-          <span class="service-price">от 15 000 ₽</span>
-          <a href="#contact" class="btn btn--ghost btn--sm" data-service="Сайт">Заказать</a>
+          <span class="service-price" data-i18n="s1.price">от 15 000 ₽</span>
+          <a href="#contact" class="btn btn--ghost btn--sm" data-service="Сайт" data-i18n="btn.order">Заказать</a>
         </div>
       </article>
 
@@ -241,11 +320,11 @@
         <div class="service-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 3.5 2.8 10.9c-1 .4-1 1.8.1 2.1l4.5 1.3 1.7 5.2c.3 1 1.6 1.2 2.2.3l2.2-3.2 4.6 3.4c.8.6 2 .2 2.2-.9l2.2-13.5c.2-1.2-1-2.1-2-1.6Z"/></svg>
         </div>
-        <h3 class="service-title">Telegram-боты</h3>
-        <p class="service-desc">Магазины, автоворонки, приём заявок, уведомления админу, админ-панель, интеграция с Google Sheets / CRM.</p>
+        <h3 class="service-title" data-i18n="s2.title">Telegram-боты</h3>
+        <p class="service-desc" data-i18n="s2.desc">Магазины, автоворонки, приём заявок, уведомления админу, админ-панель, интеграция с Google Sheets / CRM.</p>
         <div class="service-foot">
-          <span class="service-price">от 10 000 ₽</span>
-          <a href="#contact" class="btn btn--ghost btn--sm" data-service="Бот">Заказать</a>
+          <span class="service-price" data-i18n="s2.price">от 10 000 ₽</span>
+          <a href="#contact" class="btn btn--ghost btn--sm" data-service="Бот" data-i18n="btn.order">Заказать</a>
         </div>
       </article>
 
@@ -253,11 +332,11 @@
         <div class="service-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="13" r="2.5"/><circle cx="6" cy="12" r="2.5"/><path d="M12 22a10 10 0 1 1 10-10"/></svg>
         </div>
-        <h3 class="service-title">Дизайн</h3>
-        <p class="service-desc">Логотипы, баннеры, оформление соцсетей, UI-макеты.</p>
+        <h3 class="service-title" data-i18n="s3.title">Дизайн</h3>
+        <p class="service-desc" data-i18n="s3.desc">Логотипы, баннеры, оформление соцсетей, UI-макеты.</p>
         <div class="service-foot">
-          <span class="service-price">от 5 000 ₽</span>
-          <a href="#contact" class="btn btn--ghost btn--sm" data-service="Дизайн">Заказать</a>
+          <span class="service-price" data-i18n="s3.price">от 5 000 ₽</span>
+          <a href="#contact" class="btn btn--ghost btn--sm" data-service="Дизайн" data-i18n="btn.order">Заказать</a>
         </div>
       </article>
 
@@ -265,11 +344,11 @@
         <div class="service-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4M15 3h4a2 2 0 0 1 2 2v4M9 21H5a2 2 0 0 1-2-2v-4M15 21h4a2 2 0 0 0 2-2v-4"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
-        <h3 class="service-title">Интеграции и автоматизация</h3>
-        <p class="service-desc">Supabase / PostgreSQL, приём заявок с сайта в Telegram, подключение форм, вебхуки, деплой.</p>
+        <h3 class="service-title" data-i18n="s4.title">Интеграции и автоматизация</h3>
+        <p class="service-desc" data-i18n="s4.desc">Supabase / PostgreSQL, приём заявок с сайта в Telegram, подключение форм, вебхуки, деплой.</p>
         <div class="service-foot">
-          <span class="service-price">от 7 000 ₽</span>
-          <a href="#contact" class="btn btn--ghost btn--sm" data-service="Другое">Заказать</a>
+          <span class="service-price" data-i18n="s4.price">от 7 000 ₽</span>
+          <a href="#contact" class="btn btn--ghost btn--sm" data-service="Другое" data-i18n="btn.order">Заказать</a>
         </div>
       </article>
 
@@ -277,18 +356,18 @@
         <div class="service-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-2.6 2.6-1.4-1.4 2.6-2.6Z"/></svg>
         </div>
-        <h3 class="service-title">Поддержка и доработки</h3>
-        <p class="service-desc">Правки, обновление контента, исправление багов.</p>
+        <h3 class="service-title" data-i18n="s5.title">Поддержка и доработки</h3>
+        <p class="service-desc" data-i18n="s5.desc">Правки, обновление контента, исправление багов.</p>
         <div class="service-foot">
-          <span class="service-price">по договорённости</span>
-          <a href="#contact" class="btn btn--ghost btn--sm" data-service="Другое">Заказать</a>
+          <span class="service-price" data-i18n="s5.price">по договорённости</span>
+          <a href="#contact" class="btn btn--ghost btn--sm" data-service="Другое" data-i18n="btn.order">Заказать</a>
         </div>
       </article>
 
       <article class="card service-card service-card--cta reveal" style="--d:.3s">
-        <h3 class="service-title">Не нашли нужное?</h3>
-        <p class="service-desc">Опишите задачу — предложу решение и назову точную цену в течение часа.</p>
-        <a href="#contact" class="btn btn--primary btn--sm">Обсудить задачу</a>
+        <h3 class="service-title" data-i18n="s6.title">Не нашли нужное?</h3>
+        <p class="service-desc" data-i18n="s6.desc">Опишите задачу — предложу решение и назову точную цену в течение часа.</p>
+        <a href="#contact" class="btn btn--primary btn--sm" data-i18n="s6.cta">Обсудить задачу</a>
       </article>
 
     </div>
@@ -297,16 +376,13 @@
 </section>
 
 
-<!-- ══════════════════════════════════════
-     5. ПАКЕТЫ
-══════════════════════════════════════ -->
 <section class="section" id="packages">
   <div class="container">
 
     <div class="section-head reveal">
-      <span class="eyebrow">// пакеты</span>
-      <h2 class="section-title">Готовые тарифы</h2>
-      <p class="section-sub">Фиксированная стоимость и срок. Всё, что выше тарифа — обсуждаем отдельно.</p>
+      <span class="eyebrow">// <span data-i18n="packages.eyebrow">пакеты</span></span>
+      <h2 class="section-title" data-i18n="packages.title">Готовые тарифы</h2>
+      <p class="section-sub" data-i18n="packages.sub">Фиксированная стоимость и срок. Всё, что выше тарифа — обсуждаем отдельно.</p>
     </div>
 
     <div class="packages-grid">
@@ -315,41 +391,41 @@
         <h3 class="package-name">СТАРТ</h3>
         <p class="package-price"><span>15 000 ₽</span></p>
         <ul class="package-list">
-          <li>Лендинг 5–7 секций</li>
-          <li>Адаптив под все устройства</li>
-          <li>Форма заявки в Telegram</li>
-          <li>Хостинг GitHub Pages</li>
-          <li>Базовое SEO</li>
+          <li data-i18n="p1.li1">Лендинг 5–7 секций</li>
+          <li data-i18n="p1.li2">Адаптив под все устройства</li>
+          <li data-i18n="p1.li3">Форма заявки в Telegram</li>
+          <li data-i18n="p1.li4">Хостинг GitHub Pages</li>
+          <li data-i18n="p1.li5">Базовое SEO</li>
         </ul>
-        <a href="#contact" class="btn btn--ghost btn--block" data-service="Сайт">Выбрать СТАРТ</a>
+        <a href="#contact" class="btn btn--ghost btn--block" data-service="Сайт" data-i18n="p1.cta">Выбрать СТАРТ</a>
       </article>
 
       <article class="card package-card package-card--popular reveal" style="--d:.08s">
-        <span class="package-badge">Популярный</span>
+        <span class="package-badge" data-i18n="popular">Популярный</span>
         <h3 class="package-name">БИЗНЕС</h3>
         <p class="package-price"><span>35 000 ₽</span></p>
         <ul class="package-list">
-          <li>Сайт 10–14 секций</li>
-          <li>Telegram-бот</li>
-          <li>База данных (Supabase / PostgreSQL)</li>
-          <li>Уведомления админу в Telegram</li>
-          <li>Админ-панель бота</li>
-          <li>Хостинг + деплой</li>
+          <li data-i18n="p2.li1">Сайт 10–14 секций</li>
+          <li data-i18n="p2.li2">Telegram-бот</li>
+          <li data-i18n="p2.li3">База данных (Supabase / PostgreSQL)</li>
+          <li data-i18n="p2.li4">Уведомления админу в Telegram</li>
+          <li data-i18n="p2.li5">Админ-панель бота</li>
+          <li data-i18n="p2.li6">Хостинг + деплой</li>
         </ul>
-        <a href="#contact" class="btn btn--primary btn--block" data-service="Сайт">Выбрать БИЗНЕС</a>
+        <a href="#contact" class="btn btn--primary btn--block" data-service="Сайт" data-i18n="p2.cta">Выбрать БИЗНЕС</a>
       </article>
 
       <article class="card package-card reveal" style="--d:.16s">
         <h3 class="package-name">ПРЕМИУМ</h3>
-        <p class="package-price"><span>от 60 000 ₽</span></p>
+        <p class="package-price"><span data-i18n="p3.price">от 60 000 ₽</span></p>
         <ul class="package-list">
-          <li>Сайт + Telegram-бот</li>
-          <li>Интеграции: CRM / оплата / Google Sheets</li>
-          <li>Расширенная админ-панель</li>
-          <li>Аналитика и цели</li>
-          <li>Поддержка 3 месяца</li>
+          <li data-i18n="p3.li1">Сайт + Telegram-бот</li>
+          <li data-i18n="p3.li2">Интеграции: CRM / оплата / Google Sheets</li>
+          <li data-i18n="p3.li3">Расширенная админ-панель</li>
+          <li data-i18n="p3.li4">Аналитика и цели</li>
+          <li data-i18n="p3.li5">Поддержка 3 месяца</li>
         </ul>
-        <a href="#contact" class="btn btn--ghost btn--block" data-service="Другое">Выбрать ПРЕМИУМ</a>
+        <a href="#contact" class="btn btn--ghost btn--block" data-service="Другое" data-i18n="p3.cta">Выбрать ПРЕМИУМ</a>
       </article>
 
     </div>
@@ -358,16 +434,13 @@
 </section>
 
 
-<!-- ══════════════════════════════════════
-     6. КАК Я РАБОТАЮ
-══════════════════════════════════════ -->
 <section class="section section--alt" id="process">
   <div class="container">
 
     <div class="section-head reveal">
-      <span class="eyebrow">// процесс</span>
-      <h2 class="section-title">Как я работаю</h2>
-      <p class="section-sub">Пять прозрачных шагов от первого сообщения до запуска.</p>
+      <span class="eyebrow">// <span data-i18n="process.eyebrow">процесс</span></span>
+      <h2 class="section-title" data-i18n="process.title">Как я работаю</h2>
+      <p class="section-sub" data-i18n="process.sub">Пять прозрачных шагов от первого сообщения до запуска.</p>
     </div>
 
     <ol class="timeline">
@@ -375,40 +448,40 @@
       <li class="step reveal">
         <span class="step-num" aria-hidden="true">01</span>
         <div class="step-body">
-          <h3>Бриф и ТЗ</h3>
-          <p>Обсуждаем задачу, фиксируем сроки и цену.</p>
+          <h3 data-i18n="step1.title">Бриф и ТЗ</h3>
+          <p data-i18n="step1.desc">Обсуждаем задачу, фиксируем сроки и цену.</p>
         </div>
       </li>
 
       <li class="step reveal" style="--d:.08s">
         <span class="step-num" aria-hidden="true">02</span>
         <div class="step-body">
-          <h3>Прототип и дизайн</h3>
-          <p>Макет в Figma, согласовываем до строчки кода.</p>
+          <h3 data-i18n="step2.title">Прототип и дизайн</h3>
+          <p data-i18n="step2.desc">Макет в Figma, согласовываем до строчки кода.</p>
         </div>
       </li>
 
       <li class="step reveal" style="--d:.16s">
         <span class="step-num" aria-hidden="true">03</span>
         <div class="step-body">
-          <h3>Разработка</h3>
-          <p>Код, подключение БД и Telegram-бота.</p>
+          <h3 data-i18n="step3.title">Разработка</h3>
+          <p data-i18n="step3.desc">Код, подключение БД и Telegram-бота.</p>
         </div>
       </li>
 
       <li class="step reveal" style="--d:.24s">
         <span class="step-num" aria-hidden="true">04</span>
         <div class="step-body">
-          <h3>Тестирование</h3>
-          <p>Проверка на устройствах, правки, доработка деталей.</p>
+          <h3 data-i18n="step4.title">Тестирование</h3>
+          <p data-i18n="step4.desc">Проверка на устройствах, правки, доработка деталей.</p>
         </div>
       </li>
 
       <li class="step reveal" style="--d:.32s">
         <span class="step-num" aria-hidden="true">05</span>
         <div class="step-body">
-          <h3>Запуск и передача</h3>
-          <p>Деплой, доступы, инструкция по управлению.</p>
+          <h3 data-i18n="step5.title">Запуск и передача</h3>
+          <p data-i18n="step5.desc">Деплой, доступы, инструкция по управлению.</p>
         </div>
       </li>
 
@@ -418,23 +491,18 @@
 </section>
 
 
-<!-- ══════════════════════════════════════
-     7. КЕЙСЫ
-══════════════════════════════════════ -->
 <section class="section" id="cases">
   <div class="container">
 
     <div class="section-head reveal">
-      <span class="eyebrow">// кейсы</span>
-      <h2 class="section-title">Проекты под ключ</h2>
-      <p class="section-sub">Реальные сайты с backend, базой данных и Telegram-ботами. Работают прямо сейчас — открой и потрогай.</p>
+      <span class="eyebrow">// <span data-i18n="cases.eyebrow">кейсы</span></span>
+      <h2 class="section-title" data-i18n="cases.title">Проекты под ключ</h2>
+      <p class="section-sub" data-i18n="cases.sub">Реальные сайты с backend, базой данных и Telegram-ботами. Работают прямо сейчас — открой и потрогай.</p>
     </div>
 
     <div class="cases-grid">
 
-      <!-- ▸ КЕЙС 1: SAKURA -->
       <article class="card case-card reveal">
-
         <div class="case-preview case-preview--sakura">
           <div class="case-preview-bar">
             <span></span><span></span><span></span>
@@ -445,61 +513,34 @@
             <span class="cp-sub">Nail Studio</span>
           </div>
           <div class="case-preview-badges">
-            <span class="live-badge"><span class="live-dot"></span>Live · работает</span>
-            <span class="mini-badge">1,5 дня</span>
+            <span class="live-badge"><span class="live-dot"></span><span data-i18n="live">Live · работает</span></span>
+            <span class="mini-badge" data-i18n="days15">1,5 дня</span>
           </div>
         </div>
 
         <div class="case-body">
           <h3 class="case-title">SAKURA • Nail Studio</h3>
+          <p data-i18n="case1.p1">Сайт-лендинг для студии маникюра из 14 секций: hero, услуги с табами, слайдер до/после, портфолио с фильтрами и лайтбоксом, мастера, форма записи, отзывы, акции, FAQ, блог.</p>
+          <p data-i18n="case1.p2">Backend: serverless на Supabase Edge Functions. Форма бронирования сохраняет заявки в PostgreSQL с RLS, уведомления приходят в Telegram с inline-кнопками «Подтвердить / Отклонить».</p>
+          <p data-i18n="case1.p3">Telegram-бот на Grammy: команды /bookings, /confirm, /cancel, /stats, /reviews, /delete_review. Модерация отзывов — в один тап.</p>
 
-          <p>
-            Сайт-лендинг для студии маникюра из 14 секций: hero, услуги с табами,
-            слайдер до/после, портфолио с фильтрами и лайтбоксом, мастера, форма записи,
-            отзывы, акции, FAQ, блог.
-          </p>
-
-          <p>
-            <strong>Backend:</strong> serverless на Supabase Edge Functions. Форма бронирования
-            сохраняет заявки в PostgreSQL с RLS, уведомления приходят в Telegram с inline-кнопками
-            «Подтвердить / Отклонить». Отдельная функция <code>submit-review</code> принимает
-            отзывы с сайта и публикует их моментально.
-          </p>
-
-          <p>
-            <strong>Telegram-бот на Grammy:</strong> команды <code>/bookings</code>,
-            <code>/confirm</code>, <code>/cancel</code>, <code>/stats</code>,
-            <code>/reviews</code>, <code>/delete_review</code>. Модерация отзывов — в один тап.
-          </p>
-
-          <p>
-            <strong>Дизайн:</strong> японский минимализм, glassmorphism, шрифты Playfair Display
-            + Montserrat, анимация падающих лепестков сакуры, focus-trap в модалках, ARIA.
-          </p>
-
-          <ul class="case-tags" aria-label="Технологии кейса">
+          <ul class="case-tags">
             <li class="tag">Landing</li>
             <li class="tag">Supabase</li>
             <li class="tag">Edge Functions</li>
             <li class="tag">Telegram Bot</li>
-            <li class="tag">Schema.org</li>
-            <li class="tag">Адаптив</li>
           </ul>
 
-          <p class="case-stack">Стек: HTML, CSS, JS • Supabase • Grammy • GitHub Pages</p>
+          <p class="case-stack">HTML, CSS, JS • Supabase • Grammy • GitHub Pages</p>
 
           <div class="case-actions">
-            <a href="https://energylow.github.io/sakura-nail-studio/" class="btn btn--primary btn--sm"
-               target="_blank" rel="noopener">Открыть сайт</a>
-            <a href="#contact" class="btn btn--ghost btn--sm">Хочу похожий</a>
+            <a href="https://energylow.github.io/sakura-nail-studio/" class="btn btn--primary btn--sm" target="_blank" rel="noopener" data-i18n="btn.openSite">Открыть сайт</a>
+            <a href="#contact" class="btn btn--ghost btn--sm" data-i18n="btn.wantSame">Хочу похожий</a>
           </div>
         </div>
-
       </article>
 
-      <!-- ▸ КЕЙС 2: ПИРАМИДА -->
       <article class="card case-card reveal" style="--d:.1s">
-
         <div class="case-preview case-preview--piramida">
           <div class="case-preview-bar">
             <span></span><span></span><span></span>
@@ -510,395 +551,338 @@
             <span class="cp-sub">Караоке · Бар</span>
           </div>
           <div class="case-preview-badges">
-            <span class="live-badge"><span class="live-dot"></span>Live · работает</span>
+            <span class="live-badge"><span class="live-dot"></span><span data-i18n="live">Live · работает</span></span>
             <span class="mini-badge">Backend</span>
           </div>
         </div>
 
         <div class="case-body">
-          <h3 class="case-title">Караоке-бар «Пирамида»</h3>
+          <h3 class="case-title" data-i18n="case2.title">Караоке-бар «Пирамида»</h3>
+          <p data-i18n="case2.p1">Сайт караоке-бара в Луганске: меню с фильтрами и поиском, фотогалерея с лайтбоксом, акции для дней рождения, слайдер отзывов, форма бронирования столиков.</p>
+          <p data-i18n="case2.p2">Бронирование: гость оставляет заявку на сайте → она сохраняется в Supabase → оба администратора получают уведомление в Telegram с inline-кнопками.</p>
+          <p data-i18n="case2.p3">Отзывы: гости оставляют отзывы прямо на сайте с выбором оценки от 1 до 5. Отзыв сразу публикуется, а админ может удалить его одним тапом.</p>
 
-          <p>
-            Сайт караоке-бара в Луганске: меню с фильтрами и поиском, фотогалерея
-            с лайтбоксом, акции для дней рождения, слайдер отзывов, форма бронирования столиков.
-          </p>
-
-          <p>
-            <strong>Бронирование:</strong> гость оставляет заявку на сайте → она сохраняется
-            в Supabase → оба администратора получают уведомление в Telegram с inline-кнопками.
-            Ответ клиенту формируется автоматически.
-          </p>
-
-          <p>
-            <strong>Отзывы:</strong> гости оставляют отзывы прямо на сайте с выбором оценки
-            от 1 до 5. Отзыв сразу публикуется, а админ может удалить его одним тапом из
-            уведомления в Telegram.
-          </p>
-
-          <p>
-            <strong>Дизайн:</strong> премиум-тёмная тема с золотыми акцентами, шрифты
-            Playfair Display + DM Sans, анимированный hero, встроенная Яндекс.Карта, полный
-            адаптив и reveal-анимации через IntersectionObserver.
-          </p>
-
-          <ul class="case-tags" aria-label="Технологии кейса">
+          <ul class="case-tags">
             <li class="tag">Cafe / HoReCa</li>
-            <li class="tag">Бронирование</li>
             <li class="tag">Supabase</li>
             <li class="tag">Telegram Bot</li>
-            <li class="tag">Яндекс.Карты</li>
           </ul>
 
-          <p class="case-stack">Стек: HTML, CSS, JS • Supabase Edge Functions • Grammy • GitHub Pages</p>
+          <p class="case-stack">HTML, CSS, JS • Supabase Edge Functions • Grammy • GitHub Pages</p>
 
           <div class="case-actions">
-            <a href="https://energylow.github.io/Piramida_Test_One/" class="btn btn--primary btn--sm"
-               target="_blank" rel="noopener">Открыть сайт</a>
-            <a href="#contact" class="btn btn--ghost btn--sm">Хочу похожий</a>
+            <a href="https://energylow.github.io/Piramida_Test_One/" class="btn btn--primary btn--sm" target="_blank" rel="noopener" data-i18n="btn.openSite">Открыть сайт</a>
+            <a href="#contact" class="btn btn--ghost btn--sm" data-i18n="btn.wantSame">Хочу похожий</a>
           </div>
         </div>
-
       </article>
 
-      <!-- ▸ ПЛЕЙСХОЛДЕР: следующий проект -->
       <article class="card case-card case-card--soon reveal" style="--d:.2s">
         <div class="case-soon">
           <span class="case-soon-icon" aria-hidden="true">+</span>
-          <h3 class="case-soon-title">Ваш проект может быть здесь</h3>
-          <p class="case-soon-text">Свободен для новых задач. Опишите идею — покажу прототип в течение 24 часов.</p>
-          <a href="#contact" class="btn btn--primary btn--sm">Обсудить проект</a>
+          <h3 class="case-soon-title" data-i18n="soon.title">Ваш проект может быть здесь</h3>
+          <p class="case-soon-text" data-i18n="soon.text">Свободен для новых задач. Опишите идею — покажу прототип в течение 24 часов.</p>
+          <a href="#contact" class="btn btn--primary btn--sm" data-i18n="soon.cta">Обсудить проект</a>
         </div>
       </article>
 
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== ОТЗЫВЫ ========== -->
+<section class="section section--alt" id="reviews">
+  <div class="container">
+
+    <div class="section-head reveal">
+      <span class="eyebrow">// <span data-i18n="reviews.eyebrow">отзывы</span></span>
+      <h2 class="section-title" data-i18n="reviews.title">Что говорят клиенты</h2>
+      <p class="section-sub" data-i18n="reviews.sub">Реальные отзывы людей, с которыми мы работали.</p>
+    </div>
+
+    <div class="reviews-summary reveal">
+      <div class="reviews-avg">
+        <strong id="reviewsAvg">—</strong>
+        <span class="reviews-avg-stars" id="reviewsAvgStars">☆☆☆☆☆</span>
+        <span class="reviews-avg-count" id="reviewsCount" data-i18n="reviews.loading">Загружаем отзывы…</span>
+      </div>
+    </div>
+
+    <div class="reviews-grid" id="reviewsGrid" aria-live="polite"></div>
+
+    <div class="reviews-cta reveal">
+      <button type="button" class="btn btn--primary btn--lg" id="openReviewModal">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        <span data-i18n="reviews.leaveCta">Оставить отзыв</span>
+      </button>
     </div>
 
   </div>
 </section>
 
 
-<!-- ══════════════════════════════════════
-     8. ПОЧЕМУ Я
-══════════════════════════════════════ -->
 <section class="section section--alt" id="why">
   <div class="container">
-
     <div class="section-head reveal">
-      <span class="eyebrow">// преимущества</span>
-      <h2 class="section-title">Почему я</h2>
+      <span class="eyebrow">// <span data-i18n="why.eyebrow">преимущества</span></span>
+      <h2 class="section-title" data-i18n="why.title">Почему я</h2>
     </div>
 
     <div class="why-grid">
-
       <article class="card why-card reveal">
-        <div class="why-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-        </div>
-        <h3>Под ключ</h3>
-        <p>От ТЗ до хостинга, без посредников.</p>
+        <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3 data-i18n="why1.title">Под ключ</h3>
+        <p data-i18n="why1.desc">От ТЗ до хостинга, без посредников.</p>
       </article>
 
       <article class="card why-card reveal" style="--d:.06s">
-        <div class="why-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8Z"/></svg>
-        </div>
-        <h3>Быстро</h3>
-        <p>Средний срок 1,5 дня для лендинга.</p>
+        <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8Z"/></svg></div>
+        <h3 data-i18n="why2.title">Быстро</h3>
+        <p data-i18n="why2.desc">Средний срок 1,5 дня для лендинга.</p>
       </article>
 
       <article class="card why-card reveal" style="--d:.12s">
-        <div class="why-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5 13 14l-4.5 1.5L10 11l4.5-1.5Z"/></svg>
-        </div>
-        <h3>Честная цена</h3>
-        <p>Фиксируем в начале, без скрытых доплат.</p>
+        <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5 13 14l-4.5 1.5L10 11l4.5-1.5Z"/></svg></div>
+        <h3 data-i18n="why3.title">Честная цена</h3>
+        <p data-i18n="why3.desc">Фиксируем в начале, без скрытых доплат.</p>
       </article>
 
       <article class="card why-card reveal" style="--d:.18s">
-        <div class="why-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-        <h3>Прозрачно</h3>
-        <p>Показываю прогресс, доступы передаю тебе.</p>
+        <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3 data-i18n="why4.title">Прозрачно</h3>
+        <p data-i18n="why4.desc">Показываю прогресс, доступы передаю тебе.</p>
       </article>
 
       <article class="card why-card reveal" style="--d:.24s">
-        <div class="why-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
-        </div>
-        <h3>Технологии</h3>
-        <p>HTML/CSS/JS, Supabase, Telegram Bot API, GitHub Pages.</p>
+        <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+        <h3 data-i18n="why5.title">Технологии</h3>
+        <p data-i18n="why5.desc">HTML/CSS/JS, Supabase, Telegram Bot API, GitHub Pages.</p>
       </article>
-
     </div>
-
   </div>
 </section>
 
 
-<!-- ══════════════════════════════════════
-     9. FAQ
-══════════════════════════════════════ -->
 <section class="section" id="faq">
   <div class="container">
-
     <div class="section-head reveal">
-      <span class="eyebrow">// faq</span>
-      <h2 class="section-title">Частые вопросы</h2>
+      <span class="eyebrow">// <span data-i18n="faq.eyebrow">faq</span></span>
+      <h2 class="section-title" data-i18n="faq.title">Частые вопросы</h2>
     </div>
 
     <div class="faq reveal" id="faqList">
-
       <div class="faq-item">
-        <h3>
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
-            <span>Сколько стоит сайт?</span>
-            <span class="faq-icon" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1">
-          <div class="faq-answer-inner">
-            <p>Лендинг 5–7 секций — от 15 000 ₽. Сайт 10–14 секций с ботом и базой данных — от 35 000 ₽.
-            Премиум с интеграциями — от 60 000 ₽. Точная цена фиксируется после брифа и не меняется по ходу работы.</p>
-          </div>
-        </div>
+        <h3><button class="faq-question" aria-expanded="false"><span data-i18n="faq.q1">Сколько стоит сайт?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
+        <div class="faq-answer"><div class="faq-answer-inner"><p data-i18n="faq.a1">Лендинг 5–7 секций — от 15 000 ₽. Сайт 10–14 секций с ботом и базой данных — от 35 000 ₽. Премиум с интеграциями — от 60 000 ₽.</p></div></div>
       </div>
 
       <div class="faq-item">
-        <h3>
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
-            <span>Какие сроки?</span>
-            <span class="faq-icon" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2">
-          <div class="faq-answer-inner">
-            <p>Средний срок лендинга — 1,5 дня с момента получения материалов. Сложные проекты
-            с ботом, БД и интеграциями — от 3 до 10 дней. Срок фиксируем в начале работы.</p>
-          </div>
-        </div>
+        <h3><button class="faq-question" aria-expanded="false"><span data-i18n="faq.q2">Какие сроки?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
+        <div class="faq-answer"><div class="faq-answer-inner"><p data-i18n="faq.a2">Средний срок лендинга — 1,5 дня с момента получения материалов. Сложные проекты с ботом, БД и интеграциями — от 3 до 10 дней.</p></div></div>
       </div>
 
       <div class="faq-item">
-        <h3>
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
-            <span>Что нужно от меня?</span>
-            <span class="faq-icon" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3">
-          <div class="faq-answer-inner">
-            <p>Описание задачи, примеры сайтов, которые нравятся, и материалы — тексты, фото, логотип.
-            Если чего-то нет — подскажу, что подготовить, и помогу с формулировками и подбором изображений.</p>
-          </div>
-        </div>
+        <h3><button class="faq-question" aria-expanded="false"><span data-i18n="faq.q3">Что нужно от меня?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
+        <div class="faq-answer"><div class="faq-answer-inner"><p data-i18n="faq.a3">Описание задачи, примеры сайтов, которые нравятся, и материалы — тексты, фото, логотип. Если чего-то нет — подскажу, что подготовить.</p></div></div>
       </div>
 
       <div class="faq-item">
-        <h3>
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
-            <span>Работаешь по договору / предоплата?</span>
-            <span class="faq-icon" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4">
-          <div class="faq-answer-inner">
-            <p>Да, работаю по договору. Предоплата 30–50% — за фактическую работу, а не «за воздух».
-            Остаток — после сдачи проекта. Все условия фиксируются письменно до старта.</p>
-          </div>
-        </div>
+        <h3><button class="faq-question" aria-expanded="false"><span data-i18n="faq.q4">Работаешь по договору / предоплата?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
+        <div class="faq-answer"><div class="faq-answer-inner"><p data-i18n="faq.a4">Да, работаю по договору. Предоплата 30–50% — за фактическую работу. Остаток — после сдачи проекта.</p></div></div>
       </div>
 
       <div class="faq-item">
-        <h3>
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
-            <span>Что входит в «под ключ»?</span>
-            <span class="faq-icon" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-answer" id="faq-a5" role="region" aria-labelledby="faq-q5">
-          <div class="faq-answer-inner">
-            <p>Бриф и ТЗ, дизайн-макет, вёрстка, адаптив, backend, база данных, Telegram-бот,
-            уведомления админу, деплой и хостинг, передача доступов и короткая инструкция по управлению.</p>
-          </div>
-        </div>
+        <h3><button class="faq-question" aria-expanded="false"><span data-i18n="faq.q5">Что входит в «под ключ»?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
+        <div class="faq-answer"><div class="faq-answer-inner"><p data-i18n="faq.a5">Бриф и ТЗ, дизайн-макет, вёрстка, адаптив, backend, база данных, Telegram-бот, уведомления админу, деплой и хостинг.</p></div></div>
       </div>
 
       <div class="faq-item">
-        <h3>
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
-            <span>Делаешь доработки после сдачи?</span>
-            <span class="faq-icon" aria-hidden="true"></span>
-          </button>
-        </h3>
-        <div class="faq-answer" id="faq-a6" role="region" aria-labelledby="faq-q6">
-          <div class="faq-answer-inner">
-            <p>Да. 14 дней после сдачи — бесплатные правки в рамках согласованного ТЗ.
-            Дальше — поддержка и доработки по договорённости, обычно небольшим фиксом за задачу.</p>
-          </div>
-        </div>
+        <h3><button class="faq-question" aria-expanded="false"><span data-i18n="faq.q6">Делаешь доработки после сдачи?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
+        <div class="faq-answer"><div class="faq-answer-inner"><p data-i18n="faq.a6">Да. 14 дней после сдачи — бесплатные правки в рамках согласованного ТЗ. Дальше — поддержка по договорённости.</p></div></div>
       </div>
-
     </div>
-
   </div>
 </section>
 
 
-<!-- ══════════════════════════════════════
-     10. ФОРМА ЗАЯВКИ
-══════════════════════════════════════ -->
 <section class="section section--alt" id="contact">
   <div class="container">
-
     <div class="section-head reveal">
-      <span class="eyebrow">// заявка</span>
-      <h2 class="section-title">Обсудим ваш проект</h2>
-      <p class="section-sub">Опишите задачу — отвечу в течение часа и назову точную цену со сроком.</p>
+      <span class="eyebrow">// <span data-i18n="contact.eyebrow">заявка</span></span>
+      <h2 class="section-title" data-i18n="contact.title">Обсудим ваш проект</h2>
+      <p class="section-sub" data-i18n="contact.sub">Опишите задачу — отвечу в течение часа и назову точную цену со сроком.</p>
     </div>
 
     <form class="contact-form reveal" id="leadForm" novalidate>
-
       <div class="form-row">
         <div class="form-group">
-          <label for="name">Имя <span aria-hidden="true">*</span></label>
-          <input type="text" id="name" name="name" placeholder="Как к вам обращаться"
-                 required autocomplete="name">
+          <label for="name"><span data-i18n="form.name">Имя</span> <span aria-hidden="true">*</span></label>
+          <input type="text" id="name" name="name" data-i18n-placeholder="form.namePh" placeholder="Как к вам обращаться" required autocomplete="name">
           <span class="form-error" data-error-for="name"></span>
         </div>
 
         <div class="form-group">
-          <label for="contact">Telegram или телефон <span aria-hidden="true">*</span></label>
-          <input type="text" id="contact" name="contact" placeholder="@username или +7 900 000-00-00"
-                 required autocomplete="tel">
+          <label for="contact"><span data-i18n="form.contact">Telegram или телефон</span> <span aria-hidden="true">*</span></label>
+          <input type="text" id="contact" name="contact" data-i18n-placeholder="form.contactPh" placeholder="@username или +7 900 000-00-00" required autocomplete="tel">
           <span class="form-error" data-error-for="contact"></span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="service">Что нужно</label>
+        <label for="service" data-i18n="form.service">Что нужно</label>
         <select id="service" name="service">
-          <option value="Сайт">Сайт</option>
-          <option value="Бот">Telegram-бот</option>
-          <option value="Дизайн">Дизайн</option>
-          <option value="Другое">Другое</option>
+          <option value="Сайт" data-i18n="form.service.site">Сайт</option>
+          <option value="Бот" data-i18n="form.service.bot">Telegram-бот</option>
+          <option value="Дизайн" data-i18n="form.service.design">Дизайн</option>
+          <option value="Другое" data-i18n="form.service.other">Другое</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="message">Описание задачи <span aria-hidden="true">*</span></label>
-        <textarea id="message" name="message" rows="5" required
-                  placeholder="Что за проект, какой функционал нужен, есть ли примеры и сроки"></textarea>
+        <label for="message"><span data-i18n="form.message">Описание задачи</span> <span aria-hidden="true">*</span></label>
+        <textarea id="message" name="message" rows="5" data-i18n-placeholder="form.messagePh" placeholder="Что за проект, какой функционал нужен, есть ли примеры и сроки" required></textarea>
         <span class="form-error" data-error-for="message"></span>
       </div>
 
       <div class="hp-field" aria-hidden="true">
-        <label for="company">Компания</label>
-        <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+        <label for="tpf-hp">Do not fill</label>
+        <input type="text" id="tpf-hp" name="tpf_x9hp2k" tabindex="-1" autocomplete="new-password" data-lpignore="true" data-form-type="other">
       </div>
 
       <div class="form-footer">
-        <button type="submit" class="btn btn--primary btn--lg" id="submitBtn">
-          Отправить заявку
-        </button>
-        <p class="form-note">
-          Нажимая кнопку, вы соглашаетесь на обработку данных для ответа на заявку.
-        </p>
+        <button type="submit" class="btn btn--primary btn--lg" id="submitBtn" data-i18n="form.submit">Отправить заявку</button>
+        <p class="form-note" data-i18n="form.note">Нажимая кнопку, вы соглашаетесь на обработку данных для ответа на заявку.</p>
       </div>
 
       <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-
     </form>
-
   </div>
 </section>
 
 
-<!-- ══════════════════════════════════════
-     11. КОНТАКТЫ
-══════════════════════════════════════ -->
 <section class="section" id="contacts">
   <div class="container">
-
     <div class="section-head reveal">
-      <span class="eyebrow">// контакты</span>
-      <h2 class="section-title">Написать напрямую</h2>
+      <span class="eyebrow">// <span data-i18n="contacts.eyebrow">контакты</span></span>
+      <h2 class="section-title" data-i18n="contacts.title">Написать напрямую</h2>
     </div>
 
     <div class="contacts-grid">
-
       <article class="card contact-card reveal">
-        <div class="contact-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 3.5 2.8 10.9c-1 .4-1 1.8.1 2.1l4.5 1.3 1.7 5.2c.3 1 1.6 1.2 2.2.3l2.2-3.2 4.6 3.4c.8.6 2 .2 2.2-.9l2.2-13.5c.2-1.2-1-2.1-2-1.6Z"/></svg>
-        </div>
+        <div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 3.5 2.8 10.9c-1 .4-1 1.8.1 2.1l4.5 1.3 1.7 5.2c.3 1 1.6 1.2 2.2.3l2.2-3.2 4.6 3.4c.8.6 2 .2 2.2-.9l2.2-13.5c.2-1.2-1-2.1-2-1.6Z"/></svg></div>
         <h3>Telegram</h3>
         <p class="contact-value">@Vladislav_Igorevich_TPF</p>
-        <a href="https://t.me/Vladislav_Igorevich_TPF" class="btn btn--primary btn--sm"
-           target="_blank" rel="noopener">Написать</a>
+        <a href="https://t.me/Vladislav_Igorevich_TPF" class="btn btn--primary btn--sm" target="_blank" rel="noopener" data-i18n="contacts.write">Написать</a>
       </article>
 
       <article class="card contact-card reveal" style="--d:.08s">
-        <div class="contact-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a12 12 0 0 0 6 6L15 14l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 3 5a1 1 0 0 1 1-1Z"/></svg>
-        </div>
+        <div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a12 12 0 0 0 6 6L15 14l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 3 5a1 1 0 0 1 1-1Z"/></svg></div>
         <h3>ВКонтакте</h3>
         <p class="contact-value">vk.ru/tpf_69</p>
-        <a href="https://vk.ru/tpf_69" class="btn btn--ghost btn--sm"
-           target="_blank" rel="noopener">Открыть</a>
+        <a href="https://vk.ru/tpf_69" class="btn btn--ghost btn--sm" target="_blank" rel="noopener" data-i18n="contacts.open">Открыть</a>
       </article>
 
       <article class="card contact-card reveal" style="--d:.16s">
-        <div class="contact-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <h3>Локация</h3>
-        <p class="contact-value">Луганск · удалённо по всей России</p>
-        <span class="contact-note">Работаю с клиентами из любого региона</span>
+        <div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3 data-i18n="contacts.loc">Локация</h3>
+        <p class="contact-value" data-i18n="contacts.locValue">Луганск · удалённо по всей России</p>
+        <span class="contact-note" data-i18n="contacts.locNote">Работаю с клиентами из любого региона</span>
       </article>
-
     </div>
-
   </div>
 </section>
 
 </main>
 
 
-<!-- ══════════════════════════════════════
-     12. ФУТЕР
-══════════════════════════════════════ -->
 <footer class="footer">
   <div class="container footer-inner">
-
     <div class="footer-brand">
       <a href="#hero" class="logo" aria-label="TPF Studio">
         <span class="logo-mark" aria-hidden="true">T</span>
         <span class="logo-text">TPF<span>Studio</span></span>
       </a>
-      <p class="footer-slogan">Сайты и Telegram-боты под ключ за 1,5 дня.</p>
+      <p class="footer-slogan" data-i18n="footer.slogan">Сайты и Telegram-боты под ключ за 1,5 дня.</p>
     </div>
 
-    <nav class="footer-nav" aria-label="Навигация в подвале">
-      <a href="#services">Услуги</a>
-      <a href="#packages">Пакеты</a>
-      <a href="#cases">Кейсы</a>
-      <a href="#process">Как работаю</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Заявка</a>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="#services" data-i18n="nav.services">Услуги</a>
+      <a href="#packages" data-i18n="nav.packages">Пакеты</a>
+      <a href="#cases" data-i18n="nav.cases">Кейсы</a>
+      <a href="#reviews" data-i18n="nav.reviews">Отзывы</a>
+      <a href="#process" data-i18n="nav.process">Как работаю</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#contact" data-i18n="nav.cta">Обсудить проект</a>
     </nav>
 
     <div class="footer-social">
-      <a href="https://t.me/Vladislav_Igorevich_TPF" target="_blank" rel="noopener" aria-label="Telegram">Telegram</a>
-      <a href="https://vk.ru/tpf_69" target="_blank" rel="noopener" aria-label="ВКонтакте">ВКонтакте</a>
+      <a href="https://t.me/Vladislav_Igorevich_TPF" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://vk.ru/tpf_69" target="_blank" rel="noopener">ВКонтакте</a>
     </div>
-
   </div>
 
   <div class="container footer-bottom">
-    <p>© 2026 TPF Studio. Владислав.</p>
-    <a href="#hero" class="to-top">Наверх ↑</a>
+    <p>© 2026 TPF Studio. <span data-i18n="footer.author">Владислав</span>.</p>
+    <a href="#hero" class="to-top" data-i18n="footer.up">Наверх ↑</a>
   </div>
 </footer>
 
-<script src="js/main.js?v=10"></script>
+
+<!-- ========== МОДАЛКА ОТЗЫВА ========== -->
+<div class="modal" id="reviewModal" hidden>
+  <div class="modal__backdrop" data-modal-close></div>
+  <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+    <button type="button" class="modal__close" data-modal-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+    <h2 class="modal__title" id="reviewModalTitle" data-i18n="reviews.form.title">Оставить отзыв</h2>
+    <p class="modal__lead" data-i18n="reviews.form.lead">Спасибо, что делитесь впечатлениями! Отзыв появится сразу на сайте.</p>
+
+    <form id="reviewForm" novalidate>
+      <div class="form-group">
+        <label for="rv-name"><span data-i18n="reviews.form.name">Ваше имя</span> *</label>
+        <input type="text" id="rv-name" name="name" required minlength="2" maxlength="80" data-i18n-placeholder="reviews.form.namePh" placeholder="Как вас представить?">
+        <span class="form-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="rv-role" data-i18n="reviews.form.role">Компания / роль (необязательно)</label>
+        <input type="text" id="rv-role" name="role" maxlength="100" data-i18n-placeholder="reviews.form.rolePh" placeholder="Кафе, студия, проект…">
+      </div>
+
+      <div class="form-group">
+        <label data-i18n="reviews.form.rating">Оценка</label>
+        <div class="rating-input" id="ratingInput" role="radiogroup" aria-label="Оценка">
+          <button type="button" class="rating-star" data-value="1" aria-label="1">★</button>
+          <button type="button" class="rating-star" data-value="2" aria-label="2">★</button>
+          <button type="button" class="rating-star" data-value="3" aria-label="3">★</button>
+          <button type="button" class="rating-star" data-value="4" aria-label="4">★</button>
+          <button type="button" class="rating-star" data-value="5" aria-label="5">★</button>
+        </div>
+        <input type="hidden" name="rating" id="rv-rating" required>
+        <span class="form-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="rv-text"><span data-i18n="reviews.form.text">Текст отзыва</span> *</label>
+        <textarea id="rv-text" name="text" rows="5" required minlength="10" maxlength="2000" data-i18n-placeholder="reviews.form.textPh" placeholder="Расскажите, как всё прошло"></textarea>
+        <span class="form-error"></span>
+      </div>
+
+      <!-- Honeypot -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="rv-hp">Do not fill</label>
+        <input type="text" id="rv-hp" name="tpf_rev_hp" tabindex="-1" autocomplete="new-password">
+      </div>
+
+      <p class="form-status" id="reviewStatus" role="status" aria-live="polite"></p>
+      <button type="submit" class="btn btn--primary btn--lg" id="reviewSubmit" data-i18n="reviews.form.submit">Отправить отзыв</button>
+    </form>
+  </div>
+</div>
+
+
+<script src="js/main.js?v=13"></script>
 </body>
 </html>
