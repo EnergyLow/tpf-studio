@@ -31,7 +31,6 @@
 <link rel="stylesheet" href="css/style.css">
 
 <script>
-  // Антимигание: применяем тему сразу, до отрисовки
   (function() {
     try {
       const t = localStorage.getItem('tpf-theme');
@@ -53,7 +52,7 @@
       "jobTitle": "Веб-разработчик, основатель TPF Studio",
       "worksFor": { "@type": "Organization", "name": "TPF Studio" },
       "address": { "@type": "PostalAddress", "addressLocality": "Луганск", "addressCountry": "RU" },
-      "sameAs": ["https://vk.ru/tpf_69", "https://t.me/Vladislav_Igorevich_TPF"],
+      "sameAs": ["https://t.me/Vladislav_Igorevich_TPF"],
       "knowsAbout": ["Разработка сайтов", "Telegram-боты", "Supabase", "Веб-дизайн", "Автоматизация"]
     },
     {
@@ -92,7 +91,6 @@
 
     <div class="nav-controls">
 
-      <!-- Языки: планета + dropdown -->
       <div class="lang" id="langRoot">
         <button type="button" class="lang-trigger" id="langTrigger"
                 aria-label="Выбрать язык"
@@ -110,69 +108,45 @@
           <div class="lang-group">
             <span class="lang-group-title">Основные / Main</span>
             <button type="button" class="lang-item is-active" data-lang="ru" role="option" aria-selected="true">
-              <span class="lang-flag">🇷🇺</span>
-              <span class="lang-name">Русский</span>
-              <span class="lang-code">RU</span>
+              <span class="lang-flag">🇷🇺</span><span class="lang-name">Русский</span><span class="lang-code">RU</span>
             </button>
             <button type="button" class="lang-item" data-lang="en" role="option" aria-selected="false">
-              <span class="lang-flag">🇬🇧</span>
-              <span class="lang-name">English</span>
-              <span class="lang-code">EN</span>
+              <span class="lang-flag">🇬🇧</span><span class="lang-name">English</span><span class="lang-code">EN</span>
             </button>
           </div>
-
           <div class="lang-group">
             <span class="lang-group-title">Другие / Others</span>
             <button type="button" class="lang-item" data-lang="uk" role="option" aria-selected="false">
-              <span class="lang-flag">🇺🇦</span>
-              <span class="lang-name">Українська</span>
-              <span class="lang-code">UK</span>
+              <span class="lang-flag">🇺🇦</span><span class="lang-name">Українська</span><span class="lang-code">UK</span>
             </button>
             <button type="button" class="lang-item" data-lang="pl" role="option" aria-selected="false">
-              <span class="lang-flag">🇵🇱</span>
-              <span class="lang-name">Polski</span>
-              <span class="lang-code">PL</span>
+              <span class="lang-flag">🇵🇱</span><span class="lang-name">Polski</span><span class="lang-code">PL</span>
             </button>
             <button type="button" class="lang-item" data-lang="de" role="option" aria-selected="false">
-              <span class="lang-flag">🇩🇪</span>
-              <span class="lang-name">Deutsch</span>
-              <span class="lang-code">DE</span>
+              <span class="lang-flag">🇩🇪</span><span class="lang-name">Deutsch</span><span class="lang-code">DE</span>
             </button>
             <button type="button" class="lang-item" data-lang="fr" role="option" aria-selected="false">
-              <span class="lang-flag">🇫🇷</span>
-              <span class="lang-name">Français</span>
-              <span class="lang-code">FR</span>
+              <span class="lang-flag">🇫🇷</span><span class="lang-name">Français</span><span class="lang-code">FR</span>
             </button>
             <button type="button" class="lang-item" data-lang="es" role="option" aria-selected="false">
-              <span class="lang-flag">🇪🇸</span>
-              <span class="lang-name">Español</span>
-              <span class="lang-code">ES</span>
+              <span class="lang-flag">🇪🇸</span><span class="lang-name">Español</span><span class="lang-code">ES</span>
             </button>
             <button type="button" class="lang-item" data-lang="tr" role="option" aria-selected="false">
-              <span class="lang-flag">🇹🇷</span>
-              <span class="lang-name">Türkçe</span>
-              <span class="lang-code">TR</span>
+              <span class="lang-flag">🇹🇷</span><span class="lang-name">Türkçe</span><span class="lang-code">TR</span>
             </button>
             <button type="button" class="lang-item" data-lang="zh" role="option" aria-selected="false">
-              <span class="lang-flag">🇨🇳</span>
-              <span class="lang-name">中文</span>
-              <span class="lang-code">ZH</span>
+              <span class="lang-flag">🇨🇳</span><span class="lang-name">中文</span><span class="lang-code">ZH</span>
             </button>
             <button type="button" class="lang-item" data-lang="ja" role="option" aria-selected="false">
-              <span class="lang-flag">🇯🇵</span>
-              <span class="lang-name">日本語</span>
-              <span class="lang-code">JA</span>
+              <span class="lang-flag">🇯🇵</span><span class="lang-name">日本語</span><span class="lang-code">JA</span>
             </button>
             <button type="button" class="lang-item" data-lang="ko" role="option" aria-selected="false">
-              <span class="lang-flag">🇰🇷</span>
-              <span class="lang-name">한국어</span>
-              <span class="lang-code">KO</span>
+              <span class="lang-flag">🇰🇷</span><span class="lang-name">한국어</span><span class="lang-code">KO</span>
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Один переключатель темы -->
       <button type="button" class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
         <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="4"/>
@@ -205,7 +179,6 @@
   </div>
 
   <div class="container hero-inner">
-
     <span class="pill reveal">
       <span class="pill-dot" aria-hidden="true"></span>
       <span data-i18n="hero.pill">Свободен для новых проектов</span>
@@ -235,8 +208,8 @@
         <dd class="stat-label" data-i18n="stats.experience">года опыта</dd>
       </div>
       <div class="stat">
-        <dt class="stat-value"><span class="counter" data-target="4">0</span></dt>
-        <dd class="stat-label" data-i18n="stats.projects">проекта под ключ</dd>
+        <dt class="stat-value"><span class="counter" data-target="5">0</span></dt>
+        <dd class="stat-label" data-i18n="stats.projects">проектов под ключ</dd>
       </div>
       <div class="stat">
         <dt class="stat-value"><span class="counter" data-target="1.5" data-decimals="1">0</span></dt>
@@ -247,7 +220,6 @@
         <dd class="stat-label" data-i18n="stats.turnkey">под ключ</dd>
       </div>
     </dl>
-
   </div>
 </section>
 
@@ -503,14 +475,15 @@
     <div class="cases-grid">
 
       <article class="card case-card reveal">
-        <div class="case-preview case-preview--sakura">
+        <div class="case-preview">
           <div class="case-preview-bar">
             <span></span><span></span><span></span>
             <em>energylow.github.io/sakura-nail-studio</em>
           </div>
-          <div class="case-preview-body">
-            <span class="cp-title">SAKURA</span>
-            <span class="cp-sub">Nail Studio</span>
+          <div class="case-preview-body case-preview--sakura">
+            <img class="case-preview-img" src="images/sakura.jpg" alt="SAKURA Nail Studio" onerror="this.remove()">
+            <span class="cp-title"></span>
+            <span class="cp-sub"></span>
           </div>
           <div class="case-preview-badges">
             <span class="live-badge"><span class="live-dot"></span><span data-i18n="live">Live · работает</span></span>
@@ -533,6 +506,11 @@
 
           <p class="case-stack">HTML, CSS, JS • Supabase • Grammy • GitHub Pages</p>
 
+          <p class="case-price">
+            <span class="case-price__label">Продано за</span>
+            <span class="case-price__value">80 000 ₽</span>
+          </p>
+
           <div class="case-actions">
             <a href="https://energylow.github.io/sakura-nail-studio/" class="btn btn--primary btn--sm" target="_blank" rel="noopener" data-i18n="btn.openSite">Открыть сайт</a>
             <a href="#contact" class="btn btn--ghost btn--sm" data-i18n="btn.wantSame">Хочу похожий</a>
@@ -541,14 +519,15 @@
       </article>
 
       <article class="card case-card reveal" style="--d:.1s">
-        <div class="case-preview case-preview--piramida">
+        <div class="case-preview">
           <div class="case-preview-bar">
             <span></span><span></span><span></span>
             <em>energylow.github.io/Piramida_Test_One</em>
           </div>
-          <div class="case-preview-body">
-            <span class="cp-title">ПИРАМИДА</span>
-            <span class="cp-sub">Караоке · Бар</span>
+          <div class="case-preview-body case-preview--piramida">
+            <img class="case-preview-img" src="images/piramida.jpg" alt="Караоке-бар Пирамида" onerror="this.remove()">
+            <span class="cp-title"></span>
+            <span class="cp-sub"></span>
           </div>
           <div class="case-preview-badges">
             <span class="live-badge"><span class="live-dot"></span><span data-i18n="live">Live · работает</span></span>
@@ -570,6 +549,11 @@
 
           <p class="case-stack">HTML, CSS, JS • Supabase Edge Functions • Grammy • GitHub Pages</p>
 
+          <p class="case-price">
+            <span class="case-price__label">Продано за</span>
+            <span class="case-price__value">60 000 ₽</span>
+          </p>
+
           <div class="case-actions">
             <a href="https://energylow.github.io/Piramida_Test_One/" class="btn btn--primary btn--sm" target="_blank" rel="noopener" data-i18n="btn.openSite">Открыть сайт</a>
             <a href="#contact" class="btn btn--ghost btn--sm" data-i18n="btn.wantSame">Хочу похожий</a>
@@ -577,21 +561,67 @@
         </div>
       </article>
 
-      <article class="card case-card case-card--soon reveal" style="--d:.2s">
-        <div class="case-soon">
-          <span class="case-soon-icon" aria-hidden="true">+</span>
-          <h3 class="case-soon-title" data-i18n="soon.title">Ваш проект может быть здесь</h3>
-          <p class="case-soon-text" data-i18n="soon.text">Свободен для новых задач. Опишите идею — покажу прототип в течение 24 часов.</p>
-          <a href="#contact" class="btn btn--primary btn--sm" data-i18n="soon.cta">Обсудить проект</a>
+      <article class="card case-card reveal" style="--d:.2s">
+        <div class="case-preview">
+          <div class="case-preview-bar">
+            <span></span><span></span><span></span>
+            <em>energylow.github.io/veranda</em>
+          </div>
+          <div class="case-preview-body case-preview--veranda">
+            <img class="case-preview-img" src="images/veranda.jpg" alt="Кафе ВерАнда" onerror="this.remove()">
+            <span class="cp-title"></span>
+            <span class="cp-sub"></span>
+          </div>
+          <div class="case-preview-badges">
+            <span class="live-badge"><span class="live-dot"></span><span data-i18n="live">Live · работает</span></span>
+            <span class="mini-badge">Full-stack</span>
+          </div>
+        </div>
+
+        <div class="case-body">
+          <h3 class="case-title" data-i18n="case3.title">Кафе «ВерАнда»</h3>
+          <p data-i18n="case3.p1">Многофункциональный сайт для кафе: меню из 9 категорий с поиском, корзина, онлайн-заказ с доставкой и самовывозом, бронирование столиков, отзывы с рейтингом, промокоды, тёмная и светлая темы.</p>
+          <p data-i18n="case3.p2">Backend: Cloudflare Workers + D1 (SQLite). REST API для меню, заказов, броней, отзывов и промокодов. Все уведомления приходят в Telegram с inline-кнопками для смены статуса заказа.</p>
+          <p data-i18n="case3.p3">Полное управление из Telegram: подтверждение → готовится → в доставке → выполнен. Плюс второй бот для аудита действий менеджеров. Юридические документы по 152-ФЗ.</p>
+
+          <ul class="case-tags">
+            <li class="tag">Cafe / HoReCa</li>
+            <li class="tag">Cloudflare D1</li>
+            <li class="tag">Telegram Bot</li>
+            <li class="tag">E-commerce</li>
+          </ul>
+
+          <p class="case-stack">HTML, CSS, JS • Cloudflare Workers • D1 (SQLite) • Telegram Bot API</p>
+
+          <p class="case-price">
+            <span class="case-price__label">Продано за</span>
+            <span class="case-price__value">90 000 ₽</span>
+          </p>
+
+          <div class="case-actions">
+            <a href="https://energylow.github.io/veranda/" class="btn btn--primary btn--sm" target="_blank" rel="noopener" data-i18n="btn.openSite">Открыть сайт</a>
+            <a href="#contact" class="btn btn--ghost btn--sm" data-i18n="btn.wantSame">Хочу похожий</a>
+          </div>
         </div>
       </article>
 
     </div>
+
+    <div class="case-soon-window reveal" style="--d:.3s">
+      <div class="case-soon-window__inner">
+        <span class="case-soon-window__icon" aria-hidden="true">+</span>
+        <div class="case-soon-window__text">
+          <h3 data-i18n="soon.title">Ваш проект может быть здесь</h3>
+          <p data-i18n="soon.text">Свободен для новых задач. Опишите идею — покажу прототип в течение 24 часов.</p>
+        </div>
+        <a href="#contact" class="btn btn--primary btn--sm" data-i18n="soon.cta">Обсудить проект</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
 
-<!-- ========== ОТЗЫВЫ ========== -->
 <section class="section section--alt" id="reviews">
   <div class="container">
 
@@ -778,9 +808,9 @@
 
       <article class="card contact-card reveal" style="--d:.08s">
         <div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a12 12 0 0 0 6 6L15 14l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 3 5a1 1 0 0 1 1-1Z"/></svg></div>
-        <h3>ВКонтакте</h3>
-        <p class="contact-value">vk.ru/tpf_69</p>
-        <a href="https://vk.ru/tpf_69" class="btn btn--ghost btn--sm" target="_blank" rel="noopener" data-i18n="contacts.open">Открыть</a>
+        <h3>Телефон</h3>
+        <p class="contact-value">+7 959 167-32-25</p>
+        <a href="tel:+79591673225" class="btn btn--ghost btn--sm" data-i18n="contacts.call">Позвонить</a>
       </article>
 
       <article class="card contact-card reveal" style="--d:.16s">
@@ -818,7 +848,6 @@
 
     <div class="footer-social">
       <a href="https://t.me/Vladislav_Igorevich_TPF" target="_blank" rel="noopener">Telegram</a>
-      <a href="https://vk.ru/tpf_69" target="_blank" rel="noopener">ВКонтакте</a>
     </div>
   </div>
 
@@ -829,7 +858,6 @@
 </footer>
 
 
-<!-- ========== МОДАЛКА ОТЗЫВА ========== -->
 <div class="modal" id="reviewModal" hidden>
   <div class="modal__backdrop" data-modal-close></div>
   <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
@@ -837,7 +865,7 @@
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m6 6 12 12M18 6 6 18"/></svg>
     </button>
     <h2 class="modal__title" id="reviewModalTitle" data-i18n="reviews.form.title">Оставить отзыв</h2>
-    <p class="modal__lead" data-i18n="reviews.form.lead">Спасибо, что делитесь впечатлениями! Отзыв появится после проверки.</p>
+    <p class="modal__lead" data-i18n="reviews.form.lead">Спасибо, что делитесь впечатлениями! Отзыв появится сразу на сайте.</p>
 
     <form id="reviewForm" novalidate>
       <div class="form-group">
@@ -870,7 +898,6 @@
         <span class="form-error"></span>
       </div>
 
-      <!-- Honeypot -->
       <div class="hp-field" aria-hidden="true">
         <label for="rv-hp">Do not fill</label>
         <input type="text" id="rv-hp" name="tpf_rev_hp" tabindex="-1" autocomplete="new-password">
@@ -883,6 +910,6 @@
 </div>
 
 
-<script src="js/main.js?v=13"></script>
+<script src="js/main.js?v=15"></script>
 </body>
 </html>

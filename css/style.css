@@ -45,7 +45,7 @@
   --radius-sm:   12px;
   --radius-lg:   22px;
   --radius-pill: 999px;
-  --container:   1180px;
+  --container:   1320px;
 
   /* Тени */
   --shadow-xs:   0 1px 2px rgba(15,15,15,.04);
@@ -2151,4 +2151,194 @@ body, .navbar, .card, .btn, .faq-item, .case-preview, .contact-form,
 }
 @media (min-width: 1024px) {
   .reviews-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* 23. ФОТО В ПРЕВЬЮ */
+.case-preview-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  z-index: 0; transition: transform .6s var(--ease);
+}
+.case-card:hover .case-preview-img { transform: scale(1.04); }
+.case-preview-body:has(.case-preview-img)::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(15,15,15,.15) 0%, rgba(15,15,15,.55) 100%);
+  z-index: 0; pointer-events: none;
+}
+.case-preview-body:has(.case-preview-img) .cp-title {
+  color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,.8), 0 1px 4px rgba(0,0,0,.6);
+}
+.case-preview-body:has(.case-preview-img) .cp-sub {
+  color: rgba(255,255,255,.92); text-shadow: 0 1px 8px rgba(0,0,0,.7);
+}
+.case-preview--veranda {
+  background:
+    radial-gradient(circle at 50% 120%, rgba(34,197,94,.35), transparent 65%),
+    radial-gradient(circle at 80% 0%, rgba(201,169,97,.32), transparent 60%),
+    #F5F0E6;
+}
+[data-theme="dark"] .case-preview--veranda {
+  background:
+    radial-gradient(circle at 50% 120%, rgba(34,197,94,.22), transparent 65%),
+    radial-gradient(circle at 80% 0%, rgba(201,169,97,.20), transparent 60%),
+    #141419;
+}
+@media (min-width: 1024px) {
+  .cases-grid { grid-template-columns: repeat(2, 1fr); gap: 26px; }
+}
+
+/* 24. ЦЕНА ПРОДАЖИ В КЕЙСАХ */
+.case-price {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; margin: 0; padding: 12px 0 0;
+  border-top: 1px dashed var(--border-2);
+}
+.case-price__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.case-price__value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.35rem; font-weight: 800;
+  letter-spacing: -.02em;
+  background: var(--grad-text);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; line-height: 1;
+}
+
+/* ═══════════════════════════════════════
+   25. ТРИ КЕЙСА В РЯД + ОКНО "ВАШ ПРОЕКТ"
+   ═══════════════════════════════════════ */
+
+/* Три кейса в ряд на десктопе */
+@media (min-width: 1024px) {
+  /* Расширяем контейнер только для секции кейсов */
+  #cases > .container { max-width: 1400px; }
+
+  .cases-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  /* Компактное превью */
+  .case-preview-body { height: 150px; }
+  .case-preview-bar { padding: 9px 12px; }
+  .case-preview-bar em { font-size: .62rem; }
+  .case-preview-badges { top: 38px; right: 10px; gap: 5px; }
+  .live-badge { font-size: .62rem; padding: 4px 9px; }
+  .mini-badge { font-size: .6rem; padding: 3px 8px; }
+
+  /* Компактная карточка */
+  .case-body { padding: 18px 18px 20px; gap: 10px; }
+  .case-title { font-size: 1.05rem; margin: 0; }
+  .case-body p { font-size: .82rem; line-height: 1.55; margin: 0; }
+
+  .case-tags { gap: 4px; }
+  .tag { font-size: .62rem; padding: 3px 7px; }
+
+  .case-stack { font-size: .66rem !important; padding-top: 8px; }
+
+  .case-price { padding-top: 8px; }
+  .case-price__label { font-size: .66rem; }
+  .case-price__value { font-size: 1.15rem; }
+
+  /* Кнопки в строку, а не в столбец */
+  .case-actions {
+    flex-direction: row;
+    gap: 8px;
+    margin-top: auto;
+  }
+  .case-actions .btn {
+    flex: 1;
+    padding: 9px 12px;
+    font-size: .78rem;
+    white-space: nowrap;
+  }
+}
+
+/* На средних экранах — 2 колонки */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cases-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+}
+
+/* Окно "Ваш проект может быть здесь" */
+.case-soon-window {
+  margin-top: 28px;
+}
+
+.case-soon-window__inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 26px;
+  background: var(--surface);
+  border: 1.5px dashed var(--border-2);
+  border-radius: var(--radius);
+  transition: border-color .3s var(--ease), background .3s var(--ease);
+}
+
+.case-soon-window__inner:hover {
+  border-color: var(--accent);
+  background: rgba(79, 70, 229, .02);
+}
+
+.case-soon-window__icon {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  border: 1px solid rgba(79, 70, 229, .25);
+  color: var(--accent);
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.case-soon-window__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.case-soon-window__text h3 {
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+}
+
+.case-soon-window__text p {
+  font-size: .88rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.case-soon-window .btn {
+  flex: 0 0 auto;
+}
+
+/* Мобильный — вертикально */
+@media (max-width: 767px) {
+  .case-soon-window__inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+    padding: 24px 20px;
+  }
+  .case-soon-window .btn {
+    width: 100%;
+  }
+}
+
+/* Тёмная тема */
+[data-theme="dark"] .case-soon-window__inner:hover {
+  background: rgba(129, 140, 248, .04);
+}
+
+[data-theme="dark"] .case-soon-window__icon {
+  background: var(--accent-soft);
+  border-color: rgba(129, 140, 248, .3);
+  color: var(--accent-ink);
 }
