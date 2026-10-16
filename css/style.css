@@ -325,7 +325,6 @@ code {
     transform .35s var(--ease),
     border-color .35s var(--ease),
     box-shadow .35s var(--ease);
-  overflow: hidden;
   isolation: isolate;
 }
 .card::before {
