@@ -1570,7 +1570,7 @@ code {
 }
 
 @media print {
-  .navbar, .hero-bg, .nav-toggle, .to-top, .nav-controls { display: none; }
+  .navbar, .hero-bg, .nav-toggle, .to-top, .nav-controls, .floating-tg { display: none; }
   body { background: #fff; color: #000; }
   body::before { display: none; }
 }
@@ -2510,7 +2510,7 @@ body, .navbar, .card, .btn, .faq-item, .case-preview, .contact-form,
   color: transparent;
 }
 
-/* ─────────── Скидка в пакетах ─────────── */
+/* ─────────── 27. Скидка в пакетах ─────────── */
 .package-price-wrap {
   display: flex;
   align-items: baseline;
@@ -2588,6 +2588,7 @@ body, .navbar, .card, .btn, .faq-item, .case-preview, .contact-form,
   color: #0B0B0F;
 }
 
+/* Плашка скидки в Hero */
 .hero-promo {
   display: inline-flex;
   align-items: center;
@@ -2605,4 +2606,76 @@ body, .navbar, .card, .btn, .faq-item, .case-preview, .contact-form,
 .hero-promo strong {
   color: var(--accent);
   font-weight: 700;
+}
+
+/* Блок гарантий */
+.guarantees-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.guarantee-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 32px 24px;
+}
+.guarantee-card .why-icon {
+  font-size: 1.8rem;
+  width: 52px; height: 52px;
+}
+.guarantee-card h3 { font-size: 1.05rem; margin: 0; }
+.guarantee-card p { font-size: .9rem; color: var(--muted); margin: 0; }
+@media (min-width: 768px) {
+  .guarantees-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ─────────── 28. Плавающая кнопка Telegram ─────────── */
+.floating-tg {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: #229ED9; /* Цвет Telegram */
+  color: #fff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 24px rgba(34, 158, 217, 0.4);
+  z-index: 999;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.floating-tg svg { width: 28px; height: 28px; margin-right: 2px; }
+.floating-tg:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 12px 28px rgba(34, 158, 217, 0.6);
+}
+@media (max-width: 768px) {
+  .floating-tg { bottom: 16px; right: 16px; width: 50px; height: 50px; }
+  .floating-tg svg { width: 24px; height: 24px; }
+}
+
+/* ─────────── Обновленный бейдж в навигации ─────────── */
+.nav-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--accent-dark);
+  background: var(--accent-soft);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  padding: 1px 6px;
+  border-radius: 6px;
+  margin-left: 6px;
+  vertical-align: middle;
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .nav-badge {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  border-color: rgba(139, 146, 248, 0.3);
 }

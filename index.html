@@ -81,7 +81,6 @@
 
     <nav class="nav-links" id="navLinks" aria-label="Основная навигация">
       <a href="#services" class="nav-link" data-i18n="nav.services">Услуги</a>
-      <!-- Добавили бейдж -10% к пакетам -->
       <a href="#packages" class="nav-link" data-i18n="nav.packages">
         Пакеты <span class="nav-badge">-10%</span>
       </a>
@@ -91,13 +90,76 @@
       <a href="#contact" class="nav-link nav-link--mobile-cta" data-i18n="nav.cta">Обсудить проект</a>
     </nav>
 
-    <!-- НОВОЕ: Кнопка "Обсудить проект" для компьютеров -->
     <a href="#contact" class="btn btn--primary btn--sm nav-cta" data-i18n="nav.cta">Обсудить проект</a>
 
     <div class="nav-controls">
-      <!-- ... (ваш код переключателя языков и темы остается без изменений) ... -->
-      <div class="lang" id="langRoot">...</div>
-      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Переключить тему">...</button>
+
+      <div class="lang" id="langRoot">
+        <button type="button" class="lang-trigger" id="langTrigger"
+                aria-label="Выбрать язык"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+                aria-controls="langMenu">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>
+          </svg>
+          <span class="lang-current" id="langCurrent">RU</span>
+        </button>
+
+        <div class="lang-menu" id="langMenu" role="listbox" aria-label="Выбор языка" hidden>
+          <div class="lang-group">
+            <span class="lang-group-title">Основные / Main</span>
+            <button type="button" class="lang-item is-active" data-lang="ru" role="option" aria-selected="true">
+              <span class="lang-flag">🇷🇺</span><span class="lang-name">Русский</span><span class="lang-code">RU</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="en" role="option" aria-selected="false">
+              <span class="lang-flag">🇬🇧</span><span class="lang-name">English</span><span class="lang-code">EN</span>
+            </button>
+          </div>
+          <div class="lang-group">
+            <span class="lang-group-title">Другие / Others</span>
+            <button type="button" class="lang-item" data-lang="uk" role="option" aria-selected="false">
+              <span class="lang-flag">🇺🇦</span><span class="lang-name">Українська</span><span class="lang-code">UK</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="pl" role="option" aria-selected="false">
+              <span class="lang-flag">🇵🇱</span><span class="lang-name">Polski</span><span class="lang-code">PL</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="de" role="option" aria-selected="false">
+              <span class="lang-flag">🇩🇪</span><span class="lang-name">Deutsch</span><span class="lang-code">DE</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="fr" role="option" aria-selected="false">
+              <span class="lang-flag">🇫🇷</span><span class="lang-name">Français</span><span class="lang-code">FR</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="es" role="option" aria-selected="false">
+              <span class="lang-flag">🇪🇸</span><span class="lang-name">Español</span><span class="lang-code">ES</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="tr" role="option" aria-selected="false">
+              <span class="lang-flag">🇹🇷</span><span class="lang-name">Türkçe</span><span class="lang-code">TR</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="zh" role="option" aria-selected="false">
+              <span class="lang-flag">🇨🇳</span><span class="lang-name">中文</span><span class="lang-code">ZH</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="ja" role="option" aria-selected="false">
+              <span class="lang-flag">🇯🇵</span><span class="lang-name">日本語</span><span class="lang-code">JA</span>
+            </button>
+            <button type="button" class="lang-item" data-lang="ko" role="option" aria-selected="false">
+              <span class="lang-flag">🇰🇷</span><span class="lang-name">한국어</span><span class="lang-code">KO</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/>
+        </svg>
+      </button>
+
     </div>
 
     <button class="nav-toggle" id="navToggle" aria-label="Открыть меню"
@@ -144,9 +206,10 @@
       <a href="#cases" class="btn btn--ghost btn--lg" data-i18n="hero.btn2">Посмотреть кейсы</a>
     </div>
 
-        <!-- Под кнопками в Hero -->
     <p class="hero-promo reveal" style="--d:.28s">
-      🔥 Сейчас действует скидка 10% на комплексный тариф «БИЗНЕС» — <strong>45 000 ₽</strong> вместо 50 000 ₽
+      <span data-i18n="hero.promo1">🔥 Сейчас действует скидка 10% на комплексный тариф «БИЗНЕС» —</span>
+      <strong data-i18n="hero.promo2">45 000 ₽</strong>
+      <span data-i18n="hero.promo3">вместо 50 000 ₽</span>
     </p>
 
     <dl class="stats reveal" style="--d:.32s">
@@ -211,6 +274,32 @@
   </div>
 </section>
 
+
+<section class="section" id="guarantees">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">// <span data-i18n="guarantees.eyebrow">гарантии</span></span>
+      <h2 class="section-title" data-i18n="guarantees.title">Работаю прозрачно и безопасно</h2>
+    </div>
+    <div class="guarantees-grid">
+      <article class="card guarantee-card reveal">
+        <div class="why-icon" aria-hidden="true">📄</div>
+        <h3 data-i18n="guarantee1.title">Официальный договор</h3>
+        <p data-i18n="guarantee1.desc">Фиксируем объем работ, сроки и стоимость. Вы защищены юридически.</p>
+      </article>
+      <article class="card guarantee-card reveal" style="--d:.1s">
+        <div class="why-icon" aria-hidden="true">🛡️</div>
+        <h3 data-i18n="guarantee2.title">Фиксированная цена</h3>
+        <p data-i18n="guarantee2.desc">Стоимость не изменится в процессе. Никаких скрытых доплат.</p>
+      </article>
+      <article class="card guarantee-card reveal" style="--d:.2s">
+        <div class="why-icon" aria-hidden="true">🔧</div>
+        <h3 data-i18n="guarantee3.title">Бесплатные правки</h3>
+        <p data-i18n="guarantee3.desc">14 дней после сдачи проекта вношу правки бесплатно в рамках ТЗ.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
 <section class="section section--alt" id="services">
   <div class="container">
@@ -323,11 +412,11 @@
       <article class="card package-card package-card--popular reveal" style="--d:.08s">
         <span class="package-badge" data-i18n="popular">Популярный</span>
         <h3 class="package-name">БИЗНЕС</h3>
-<div class="package-price-wrap">
-  <span class="package-price-old">50 000 ₽</span>
-  <p class="package-price"><span>45 000 ₽</span></p>
-  <span class="package-discount-badge">-10%</span>
-</div>
+        <div class="package-price-wrap">
+          <span class="package-price-old">50 000 ₽</span>
+          <p class="package-price"><span>45 000 ₽</span></p>
+          <span class="package-discount-badge">-10%</span>
+        </div>
         <ul class="package-list">
           <li data-i18n="p2.li1">Сайт 10–14 секций</li>
           <li data-i18n="p2.li2">Telegram-бот (приём заявок, уведомления)</li>
@@ -358,8 +447,7 @@
 
     </div>
 
-    <!-- НОВЫЙ БЛОК: ПОДДЕРЖКА -->
-    <div class="support-banner reveal" style="--d:.24s">
+        <div class="support-banner reveal" style="--d:.24s">
       <div class="support-banner__icon" aria-hidden="true">🛠️</div>
       <div class="support-banner__text">
         <h3 data-i18n="support.title">Нужна поддержка после сдачи проекта?</h3>
@@ -394,7 +482,6 @@
         </div>
       </li>
 
-      <!-- НОВЫЙ ШАГ: Предоплата -->
       <li class="step reveal" style="--d:.06s">
         <span class="step-num" aria-hidden="true">02</span>
         <div class="step-body">
@@ -887,6 +974,10 @@
   </div>
 </div>
 
+<!-- Плавающая кнопка Telegram -->
+<a href="https://t.me/Vladislav_Igorevich_TPF" class="floating-tg" target="_blank" rel="noopener" aria-label="Написать в Telegram">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 3.5 2.8 10.9c-1 .4-1 1.8.1 2.1l4.5 1.3 1.7 5.2c.3 1 1.6 1.2 2.2.3l2.2-3.2 4.6 3.4c.8.6 2 .2 2.2-.9l2.2-13.5c.2-1.2-1-2.1-2-1.6Z"/></svg>
+</a>
 
 <script src="js/main.js?v=15"></script>
 </body>

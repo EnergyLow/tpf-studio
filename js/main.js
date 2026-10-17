@@ -1,8 +1,3 @@
-/* ═══════════════════════════════════════════════════════════
-   TPF Studio — main.js
-   Чистый JS, без библиотек.
-   ═══════════════════════════════════════════════════════════ */
-
 (function () {
   'use strict';
 
@@ -406,7 +401,6 @@
         'footer.slogan': 'Websites and Telegram bots turnkey in 1.5 days.',
         'footer.author': 'Vladislav', 'footer.up': 'Back to top ↑'
       },
-
       uk: {
         'nav.services': 'Послуги', 'nav.packages': 'Пакети', 'nav.cases': 'Кейси',
         'nav.reviews': 'Відгуки',
@@ -501,7 +495,6 @@
         'footer.slogan': 'Сайти та Telegram-боти під ключ за 1,5 дня.',
         'footer.author': 'Владислав', 'footer.up': 'Догори ↑'
       },
-
       pl: {
         'nav.services': 'Usługi', 'nav.packages': 'Pakiety', 'nav.cases': 'Portfolio',
         'nav.reviews': 'Opinie',
@@ -596,7 +589,6 @@
         'footer.slogan': 'Strony i boty Telegram pod klucz w 1,5 dnia.',
         'footer.author': 'Władysław', 'footer.up': 'Do góry ↑'
       },
-
       de: {
         'nav.services': 'Leistungen', 'nav.packages': 'Pakete', 'nav.cases': 'Projekte',
         'nav.reviews': 'Bewertungen',
@@ -691,7 +683,6 @@
         'footer.slogan': 'Websites und Telegram-Bots schlüsselfertig in 1,5 Tagen.',
         'footer.author': 'Wladislaw', 'footer.up': 'Nach oben ↑'
       },
-
       fr: {
         'nav.services': 'Services', 'nav.packages': 'Forfaits', 'nav.cases': 'Réalisations',
         'nav.reviews': 'Avis',
@@ -786,7 +777,6 @@
         'footer.slogan': 'Sites et bots Telegram clé en main en 1,5 jour.',
         'footer.author': 'Vladislav', 'footer.up': 'En haut ↑'
       },
-
       es: {
         'nav.services': 'Servicios', 'nav.packages': 'Paquetes', 'nav.cases': 'Proyectos',
         'nav.reviews': 'Reseñas',
@@ -881,7 +871,6 @@
         'footer.slogan': 'Sitios y bots de Telegram llave en mano en 1,5 días.',
         'footer.author': 'Vladislav', 'footer.up': 'Arriba ↑'
       },
-
       tr: {
         'nav.services': 'Hizmetler', 'nav.packages': 'Paketler', 'nav.cases': 'Projeler',
         'nav.reviews': 'Yorumlar',
@@ -976,7 +965,6 @@
         'footer.slogan': 'Web siteleri ve Telegram botları 1,5 günde anahtar teslim.',
         'footer.author': 'Vladislav', 'footer.up': 'Yukarı ↑'
       },
-
       zh: {
         'nav.services': '服务', 'nav.packages': '套餐', 'nav.cases': '案例',
         'nav.reviews': '评价',
@@ -1071,7 +1059,6 @@
         'footer.slogan': '网站和 Telegram 机器人 1.5 天交钥匙。',
         'footer.author': '弗拉迪斯拉夫', 'footer.up': '回到顶部 ↑'
       },
-
       ja: {
         'nav.services': 'サービス', 'nav.packages': 'パッケージ', 'nav.cases': '実績',
         'nav.reviews': 'レビュー',
@@ -1166,7 +1153,6 @@
         'footer.slogan': 'ウェブサイトと Telegram ボットを 1.5 日でターンキー。',
         'footer.author': 'ウラジスラフ', 'footer.up': '上へ ↑'
       },
-
       ko: {
         'nav.services': '서비스', 'nav.packages': '패키지', 'nav.cases': '포트폴리오',
         'nav.reviews': '리뷰',
