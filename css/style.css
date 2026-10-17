@@ -2566,3 +2566,43 @@ body, .navbar, .card, .btn, .faq-item, .case-preview, .contact-form,
     font-size: 1rem;
   }
 }
+
+/* Бейдж скидки в навигации */
+.nav-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #fff;
+  background: #EF4444;
+  padding: 2px 5px;
+  border-radius: 4px;
+  margin-left: 4px;
+  vertical-align: middle;
+  display: inline-block;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="dark"] .nav-badge {
+  background: #F87171;
+  color: #0B0B0F;
+}
+
+.hero-promo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: var(--text-2);
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+  margin: 0 auto 40px;
+  text-align: center;
+}
+.hero-promo strong {
+  color: var(--accent);
+  font-weight: 700;
+}
