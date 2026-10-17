@@ -1531,10 +1531,10 @@ code {
   .cases-grid { grid-template-columns: repeat(2, 1fr); gap: 26px; }
   .case-preview-body { height: 260px; }
 
-  .timeline {
+    .timeline {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(6, 1fr); /* Теперь 6 колонок */
+    gap: 12px; /* Чуть уменьшили отступ, чтобы поместилось */
     padding-left: 0;
   }
   .timeline::before {
@@ -1542,10 +1542,10 @@ code {
     width: auto; height: 2px;
     background: linear-gradient(90deg, var(--accent), rgba(79,70,229,.1));
   }
-  .step {
+    .step {
     flex-direction: column;
     gap: 14px;
-    padding: 22px 20px;
+    padding: 20px 16px; /* Уменьшили боковые отступы внутри карточек */
   }
   .step:hover { transform: translateY(-6px); }
 }
