@@ -308,7 +308,7 @@
         if (statusEl) statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } catch (err) {
         console.error('[TPF Studio] Ошибка:', err);
-        setStatus('❌ Не удалось отправить заявку. Попробуйте ещё раз или напишите в Telegram: @Vladislav_Igorevich_TPF', 'error');
+        setStatus('❌ Не удалось отправить заявку. Попробуйте ещё раз или напишите в Telegram: @TPF_69', 'error');
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
