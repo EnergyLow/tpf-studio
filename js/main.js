@@ -227,45 +227,55 @@
     });
   });
 
-  /* 8. ФОРМА */
-  const form      = document.getElementById('leadForm');
-  const statusEl  = document.getElementById('formStatus');
-  const submitBtn = document.getElementById('submitBtn');
+    /* 8. ФОРМА (ПРИНУДИТЕЛЬНО ЗАБЛОКИРОВАНА) */
+  const form = document.getElementById('leadForm');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      // Отправка отключена, так как форма закрыта
+    });
+  }
 
-  function setStatus(text, type) {
-    if (!statusEl) return;
-    statusEl.textContent = text;
-    statusEl.classList.remove('is-success', 'is-error');
-    if (type) statusEl.classList.add('is-' + type);
+  /* ─────────── НОВОЕ: SUCCESS STATE ─────────── */
+  function showLeadSuccess() {
+    const formEl    = document.getElementById('leadForm');
+    const successEl = document.getElementById('formSuccess');
+    if (!formEl || !successEl) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let done = false;
+
+    const finalize = () => {
+      if (done) return;
+      done = true;
+      formEl.classList.remove('is-hiding');
+      formEl.hidden    = true;
+      successEl.hidden = false;
+      successEl.focus({ preventScroll: false });
+    };
+
+    if (prefersReduced) { finalize(); return; }
+
+    formEl.classList.add('is-hiding');
+    formEl.addEventListener('animationend', finalize, { once: true });
+    setTimeout(finalize, 600); // страховка, если animationend не сработает
   }
-  function setFieldError(input, message) {
-    const group = input.closest('.form-group');
-    if (!group) return;
-    group.classList.toggle('has-error', Boolean(message));
-    const errEl = group.querySelector('.form-error');
-    if (errEl) errEl.textContent = message || '';
+
+  const resetLeadBtn = document.getElementById('resetLeadForm');
+  if (resetLeadBtn) {
+    resetLeadBtn.addEventListener('click', function () {
+      const formEl    = document.getElementById('leadForm');
+      const successEl = document.getElementById('formSuccess');
+      if (!formEl || !successEl) return;
+      successEl.hidden = true;
+      formEl.classList.remove('is-hiding');
+      formEl.hidden = false;
+      if (typeof setStatus === 'function') setStatus('', null);
+      const firstInput = formEl.querySelector('#name');
+      if (firstInput) firstInput.focus();
+    });
   }
-  function validateForm() {
-    let valid = true;
-    const name    = form.querySelector('#name');
-    const contact = form.querySelector('#contact');
-    const message = form.querySelector('#message');
-    if (!name.value.trim() || name.value.trim().length < 2) {
-      setFieldError(name, 'Укажите имя (минимум 2 символа)');
-      valid = false;
-    } else setFieldError(name, '');
-    const cv = contact.value.trim();
-    const ok = cv.length >= 5 && (/@[\w.]{3,}/.test(cv) || /[\d\s()+-]{7,}/.test(cv));
-    if (!ok) {
-      setFieldError(contact, 'Укажите Telegram (@username) или телефон');
-      valid = false;
-    } else setFieldError(contact, '');
-    if (!message.value.trim() || message.value.trim().length < 10) {
-      setFieldError(message, 'Опишите задачу подробнее (минимум 10 символов)');
-      valid = false;
-    } else setFieldError(message, '');
-    return valid;
-  }
+  /* ─────────── /НОВОЕ ─────────── */
 
   async function sendLead(data) {
     const res = await fetch(WORKER_URL + '/submit-lead', {
@@ -303,9 +313,10 @@
       };
       try {
         await sendLead(data);
-        setStatus('✅ Заявка отправлена — отвечу в течение часа. Спасибо!', 'success');
+        /* НОВОЕ: вместо зелёного статуса — плавно скрываем форму и показываем success-card */
+        setStatus('', null);
         form.reset();
-        if (statusEl) statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        showLeadSuccess();
       } catch (err) {
         console.error('[TPF Studio] Ошибка:', err);
         setStatus('❌ Не удалось отправить заявку. Попробуйте ещё раз или напишите в Telegram: @TPF_69', 'error');
