@@ -1056,3 +1056,387 @@ body.is-loading {
   width: 18px !important;
   height: 18px !important;
 }
+
+.case-preview--app { 
+  background: radial-gradient(circle at 50% 120%, rgba(16, 185, 129, .35), transparent 65%), radial-gradient(circle at 20% 0%, rgba(79, 70, 229, .35), transparent 60%), #F4F6F8; 
+}
+[data-theme="dark"] .case-preview--app { 
+  background: radial-gradient(circle at 50% 120%, rgba(16, 185, 129, .22), transparent 65%), radial-gradient(circle at 20% 0%, rgba(79, 70, 229, .20), transparent 60%), #141419; 
+}
+
+/* ═══════════════════════════════════════════════════════════
+   БЛОК ПРИЛОЖЕНИЯ (APP SECTION)
+   ═══════════════════════════════════════════════════════════ */
+
+.app-section {
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.app-bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+@media(min-width: 1024px) {
+  .app-bento {
+    grid-template-columns: 1.1fr 0.9fr;
+    padding: 60px;
+  }
+}
+
+.app-bento::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -20%;
+  width: 60%; height: 100%;
+  background: radial-gradient(circle, rgba(16,185,129,.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.app-content {
+  position: relative;
+  z-index: 2;
+}
+
+.app-features {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 32px 0;
+}
+
+.app-features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--text-2);
+}
+
+.app-features svg {
+  width: 20px; height: 20px;
+  color: #10B981;
+  flex-shrink: 0;
+  background: rgba(16,185,129,.1);
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.app-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.app-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Имитация окна Windows */
+.app-mockup-wrap {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+}
+
+.app-mockup {
+  width: 100%;
+  max-width: 480px;
+  background: #1A1A24;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+  box-shadow: 0 30px 60px -15px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.05);
+  overflow: hidden;
+  transform: rotateY(-5deg) rotateX(5deg);
+  transition: transform .5s var(--ease);
+}
+
+.app-mockup:hover {
+  transform: rotateY(0) rotateX(0) translateY(-5px);
+}
+
+.app-mockup-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  background: #111117;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+
+.app-mockup-bar span { width: 10px; height: 10px; border-radius: 50%; }
+.app-mockup-bar span:nth-child(1) { background: #FF5F57; }
+.app-mockup-bar span:nth-child(2) { background: #FEBC2E; }
+.app-mockup-bar span:nth-child(3) { background: #28C840; }
+
+.app-mockup-bar em {
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,.4);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+}
+
+.app-mockup-body {
+  display: flex;
+  height: 280px;
+  background: #0B0B0F;
+}
+
+.app-mockup-sidebar {
+  width: 80px;
+  background: #16161D;
+  border-right: 1px solid rgba(255,255,255,.05);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.app-mockup-logo {
+  width: 32px; height: 32px;
+  background: var(--grad);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  color: #fff; font-weight: 800; font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 10px;
+}
+
+.app-mockup-line { width: 100%; height: 6px; background: rgba(255,255,255,.1); border-radius: 4px; }
+
+.app-mockup-content {
+  flex: 1;
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.app-mockup-widget {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #1B1B23;
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 16px;
+  border-radius: 12px;
+  width: 100%;
+  margin-bottom: 24px;
+  z-index: 2;
+}
+
+.app-mockup-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: #fff; font-size: 1.2rem;
+  box-shadow: 0 4px 12px rgba(79,70,229,.4);
+}
+
+.app-mockup-info b { display: block; font-size: 0.85rem; color: #fff; margin-bottom: 2px;}
+.app-mockup-info span { font-size: 0.7rem; color: rgba(255,255,255,.5); }
+
+.app-mockup-wave {
+  display: flex; gap: 3px; align-items: flex-end; height: 20px; margin-left: auto;
+}
+.app-mockup-wave span {
+  width: 3px; background: var(--accent); border-radius: 2px;
+  animation: wave 1s infinite alternate;
+}
+.app-mockup-wave span:nth-child(1) { height: 10px; animation-delay: 0s; }
+.app-mockup-wave span:nth-child(2) { height: 20px; animation-delay: .2s; }
+.app-mockup-wave span:nth-child(3) { height: 14px; animation-delay: .4s; }
+.app-mockup-wave span:nth-child(4) { height: 18px; animation-delay: .1s; }
+
+@keyframes wave {
+  0% { transform: scaleY(0.5); }
+  100% { transform: scaleY(1); }
+}
+
+.app-mockup-lyrics {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(79,70,229,.5);
+  background: rgba(255,255,255,.1);
+  padding: 8px 24px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  animation: lyricPulse 2s infinite;
+  z-index: 2;
+}
+
+@keyframes lyricPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   МОБИЛЬНАЯ ОПТИМИЗАЦИЯ (Mobile First Adjustments)
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  /* Общие отступы для планшетов */
+  .section { padding: 60px 0; }
+}
+
+@media (max-width: 768px) {
+  /* 1. ГЛОБАЛЬНЫЕ НАСТРОЙКИ */
+  .container { padding: 0 16px; }
+  .section { padding: 48px 0; }
+  .section-title { font-size: 2rem; }
+  
+  /* Увеличиваем область нажатия для всех кнопок (важно для iOS/Android) */
+  .btn { 
+    padding: 14px 20px; 
+    font-size: 1rem; 
+    min-height: 48px; 
+  }
+  .btn--sm { 
+    padding: 12px 16px; 
+    font-size: 0.9rem; 
+    min-height: 42px; 
+  }
+
+  /* 2. НАВБАР И ШАПКА */
+  .nav-inner { height: 60px; gap: 8px; }
+  .logo-mark { width: 32px; height: 32px; }
+  
+  /* Уменьшаем кнопки в шапке, чтобы они не слипались */
+  .nav-controls { gap: 4px; margin-right: 4px; }
+  .lang-trigger { padding: 8px 10px; }
+  .theme-toggle, .music-toggle { width: 36px; height: 36px; }
+  
+  /* Мобильное меню */
+  .nav-links.is-open {
+    top: calc(100% + 4px);
+    left: 16px; right: 16px;
+    padding: 16px;
+  }
+  .nav-link { padding: 12px 16px; font-size: 1rem; }
+
+  /* 3. HERO-СЕКЦИЯ */
+  .hero { padding: 100px 0 40px; }
+  .hero-title { font-size: clamp(2.2rem, 9vw, 3rem); }
+  .hero-sub { font-size: 1rem; margin-bottom: 24px; }
+  
+  /* Кнопки в Hero на всю ширину */
+  .hero-actions { flex-direction: column; width: 100%; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+
+  /* 4. БЛОК ПРИЛОЖЕНИЯ (APP) */
+  .app-bento { 
+    padding: 24px 16px; 
+    gap: 24px; 
+    border-radius: 20px;
+  }
+  .app-actions { flex-direction: column; gap: 10px; }
+  .app-actions .btn { width: 100%; }
+  
+  /* Уменьшаем имитацию окна, чтобы не было горизонтального скролла */
+  .app-mockup-wrap { perspective: none; }
+  .app-mockup { 
+    transform: none !important; /* Убираем 3D-наклон на мобилках */
+    box-shadow: 0 15px 30px -10px rgba(0,0,0,.3); 
+  }
+  .app-mockup-body { height: 200px; }
+  .app-mockup-sidebar { width: 50px; padding: 10px; }
+  .app-mockup-logo { width: 24px; height: 24px; font-size: 0.8rem; }
+  .app-mockup-content { padding: 16px; }
+  .app-mockup-widget { padding: 10px; gap: 10px; margin-bottom: 16px; }
+  .app-mockup-icon { width: 32px; height: 32px; font-size: 0.9rem; }
+  .app-mockup-lyrics { font-size: 1.2rem; padding: 6px 16px; }
+  .app-features li { font-size: 0.9rem; gap: 10px; }
+
+  /* 5. КЕЙСЫ (CASES) */
+  .case-card { border-radius: 16px; }
+  .case-preview-body { height: 180px; }
+  .case-body { padding: 20px 16px; gap: 12px; }
+  .case-title { font-size: 1.15rem; }
+  
+  /* Кнопки в кейсах друг под другом */
+  .case-actions { flex-direction: column; gap: 8px; }
+  .case-actions .btn { width: 100%; flex: none; }
+  
+  .case-preview-badges { top: 44px; right: 10px; }
+
+  /* 6. УСЛУГИ И ЦЕНЫ */
+  .pricing-main { padding: 24px 16px; border-radius: 16px; }
+  .package-price { font-size: 1.8rem; }
+  .package-list li { font-size: 0.85rem; }
+  .services-side-grid { gap: 12px; }
+  .service-card { padding: 20px 16px; }
+  .support-banner { padding: 20px 16px; border-radius: 16px; flex-direction: column; align-items: flex-start; }
+  .support-banner__price { width: 100%; justify-content: space-between; margin-top: 10px; }
+
+  /* 7. ПРОЦЕСС */
+  .step { padding: 16px; flex-direction: row; align-items: center; gap: 12px; }
+  .step-num { width: 36px; height: 36px; font-size: 0.9rem; }
+  .step-body h3 { font-size: 1.05rem; margin: 0; }
+
+  /* 8. ОБО МНЕ */
+  .about-card { padding: 24px 16px; }
+  .guarantee-card { padding: 24px 16px; }
+  .avatar { width: 70px; height: 70px; font-size: 1.6rem; }
+
+  /* 9. ОТЗЫВЫ И FAQ */
+  .reviews-avg { flex-direction: column; gap: 8px; padding: 16px; text-align: center; }
+  .faq-question { padding: 16px; font-size: 0.95rem; }
+  .faq-answer-inner { padding: 0 16px 16px; font-size: 0.9rem; }
+
+  /* 10. КОНТАКТЫ И ФОРМА */
+  .form-lock { inset: 0; padding: 12px; } /* Убираем вылеты за края */
+  .form-lock__box { padding: 24px 16px; max-width: 100%; }
+  .form-lock__links .btn { padding: 12px 16px !important; padding-left: 38px !important; font-size: 0.9rem !important; }
+  
+  .contact-card--big { padding: 16px; gap: 12px; }
+  .contact-card--big .contact-icon { width: 44px; height: 44px; }
+  .contact-info-text h3 { font-size: 1rem; }
+  .contact-info-text p { font-size: 0.85rem; }
+
+  /* Модалка */
+  .modal__dialog { padding: 24px 16px; max-height: 95vh; }
+  .modal__title { font-size: 1.25rem; }
+  .rating-star { font-size: 2rem !important; }
+
+  /* 11. ФУТЕР */
+  .footer { padding: 40px 0 24px; }
+  .footer-bottom { flex-direction: column; gap: 16px; align-items: center; text-align: center; }
+  
+  /* 12. ПЛАВАЮЩАЯ КНОПКА TG */
+  .floating-tg { bottom: 16px; right: 16px; width: 48px; height: 48px; }
+  .floating-tg svg { width: 24px; height: 24px; }
+}
+
+@media (max-width: 380px) {
+  /* Для самых маленьких экранов (iPhone SE, старые андроиды) */
+  .nav-inner { gap: 4px; }
+  .lang-trigger .lang-current { display: none; } /* Скрываем текст RU, оставляем только глобус */
+  .lang-trigger { padding: 8px; }
+  
+  .hero-title { font-size: 1.9rem; }
+  .btn { font-size: 0.9rem; }
+  
+  /* Уменьшаем паддинги в оверлее музыки */
+  .lyrics-overlay { padding: 16px; }
+  #lyricsText { font-size: 1.5rem; }
+}

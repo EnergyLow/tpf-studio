@@ -319,7 +319,7 @@
         showLeadSuccess();
       } catch (err) {
         console.error('[TPF Studio] Ошибка:', err);
-        setStatus('❌ Не удалось отправить заявку. Попробуйте ещё раз или напишите в Telegram: @TPF_69', 'error');
+        setStatus('❌ Не удалось отправить заявку. Попробуйте ещё раз или напишите в Telegram: @studiotpf', 'error');
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
@@ -384,6 +384,15 @@
 
     const translations = {
       en: {
+        'nav.app': 'App',
+        'app.title': 'TPF Studio in a standalone window',
+        'app.sub': 'I don\'t limit myself to the browser. I now build full-fledged Windows desktop applications that are blazing fast, work offline, and look native.',
+        'app.f1': 'Offline mode and local data',
+        'app.f2': 'Hotkeys and system integration',
+        'app.f3': 'Fast one-click installer (.exe)',
+        'app.btn': 'Download App',
+        'app.order': 'Order custom software',
+        'app.price': 'Turnkey development — from 50 000 ₽',
         'nav.services': 'Services', 'nav.packages': 'Packages', 'nav.cases': 'Cases',
         'nav.reviews': 'Reviews', 'nav.process': 'Process', 'nav.faq': 'FAQ', 'nav.cta': 'Discuss a project',
         'hero.pill': 'Available for new projects', 'hero.title1': 'I build websites and Telegram bots', 'hero.title2': 'turnkey in 1.5 days',
@@ -419,6 +428,15 @@
         'footer.slogan': 'Websites and Telegram bots turnkey in 1.5 days.', 'footer.author': 'Vladislav', 'footer.up': 'Back to top ↑'
       },
       uk: {
+        'nav.app': 'Додаток',
+        'app.title': 'TPF Studio тепер і в окремому вікні',
+        'app.sub': 'Я не обмежуюся браузером. Тепер я створюю повноцінні десктопні додатки для Windows, які працюють блискавично, не залежать від інтернету і виглядають нативно.',
+        'app.f1': 'Офлайн-режим та локальні дані',
+        'app.f2': 'Гарячі клавіші та інтеграція з системою',
+        'app.f3': 'Швидкий інсталятор (.exe) в один клік',
+        'app.btn': 'Завантажити додаток',
+        'app.order': 'Замовити свій софт',
+        'app.price': 'Розробка під ключ — від 50 000 ₽',
         'nav.services': 'Послуги', 'nav.packages': 'Пакети', 'nav.cases': 'Кейси', 'nav.reviews': 'Відгуки', 'nav.process': 'Як працюю', 'nav.faq': 'FAQ', 'nav.cta': 'Обговорити проєкт',
         'hero.pill': 'Доступний для нових проєктів', 'hero.title1': 'Створюю сайти та Telegram-ботів', 'hero.title2': 'під ключ за 1,5 дня',
         'hero.sub': 'TPF Studio — соло-розробка від ідеї до запуску. Без посередників, без затягування термінів, з гарантією.', 'hero.btn1': 'Обговорити проєкт', 'hero.btn2': 'Подивитись кейси',
@@ -449,6 +467,15 @@
         'footer.slogan': 'Сайти та Telegram-боти під ключ за 1,5 дня.', 'footer.author': 'Владислав', 'footer.up': 'Догори ↑'
       },
       pl: {
+        'nav.app': 'Aplikacja',
+        'app.title': 'TPF Studio teraz w osobnym oknie',
+        'app.sub': 'Nie ograniczam się do przeglądarki. Teraz tworzę pełnoprawne aplikacje desktopowe dla Windows, które działają błyskawicznie, nie zależą od internetu i wyglądają natywnie.',
+        'app.f1': 'Tryb offline i dane lokalne',
+        'app.f2': 'Skróty klawiszowe i integracja z systemem',
+        'app.f3': 'Szybki instalator (.exe) jednym kliknięciem',
+        'app.btn': 'Pobierz aplikację',
+        'app.order': 'Zamów własne oprogramowanie',
+        'app.price': 'Rozwój pod klucz — od 50 000 ₽',
         'nav.services': 'Usługi', 'nav.packages': 'Pakiety', 'nav.cases': 'Portfolio', 'nav.reviews': 'Opinie', 'nav.process': 'Jak pracuję', 'nav.faq': 'FAQ', 'nav.cta': 'Omów projekt',
         'hero.pill': 'Dostępny dla nowych projektów', 'hero.title1': 'Tworzę strony i boty Telegram', 'hero.title2': 'pod klucz w 1,5 dnia',
         'hero.sub': 'TPF Studio — samodzielny rozwój od pomysłu do startu. Bez pośredników, terminowo, z gwarancją.', 'hero.btn1': 'Omów projekt', 'hero.btn2': 'Zobacz portfolio',
@@ -479,6 +506,15 @@
         'footer.slogan': 'Strony i boty Telegram pod klucz w 1,5 dnia.', 'footer.author': 'Władysław', 'footer.up': 'Do góry ↑'
       },
       de: {
+        'nav.app': 'App',
+        'app.title': 'TPF Studio jetzt auch als eigenständige App',
+        'app.sub': 'Ich beschränke mich nicht auf den Browser. Ich baue jetzt vollwertige Windows-Desktop-Anwendungen, die blitzschnell sind, offline funktionieren und nativ aussehen.',
+        'app.f1': 'Offline-Modus und lokale Daten',
+        'app.f2': 'Hotkeys und Systemintegration',
+        'app.f3': 'Schneller One-Click-Installer (.exe)',
+        'app.btn': 'App herunterladen',
+        'app.order': 'Eigene Software bestellen',
+        'app.price': 'Schlüsselfertige Entwicklung — ab 50 000 ₽',
         'nav.services': 'Leistungen', 'nav.packages': 'Pakete', 'nav.cases': 'Projekte', 'nav.reviews': 'Bewertungen', 'nav.process': 'Wie ich arbeite', 'nav.faq': 'FAQ', 'nav.cta': 'Projekt besprechen',
         'hero.pill': 'Verfügbar für neue Projekte', 'hero.title1': 'Ich baue Websites und Telegram-Bots', 'hero.title2': 'schlüsselfertig in 1,5 Tagen',
         'hero.sub': 'TPF Studio — Solo-Entwicklung von der Idee bis zum Start. Ohne Mittelsmänner, termingerecht, mit Garantie.', 'hero.btn1': 'Projekt besprechen', 'hero.btn2': 'Projekte ansehen',
@@ -509,6 +545,15 @@
         'footer.slogan': 'Websites und Telegram-Bots schlüsselfertig in 1,5 Tagen.', 'footer.author': 'Wladislaw', 'footer.up': 'Nach oben ↑'
       },
       fr: {
+        'nav.app': 'App',
+        'app.title': 'TPF Studio maintenant dans une fenêtre dédiée',
+        'app.sub': 'Je ne me limite pas au navigateur. Je crée maintenant des applications de bureau Windows complètes qui sont ultra-rapides, fonctionnent hors ligne et ont un look natif.',
+        'app.f1': 'Mode hors ligne et données locales',
+        'app.f2': 'Raccourcis clavier et intégration système',
+        'app.f3': 'Installateur rapide en un clic (.exe)',
+        'app.btn': 'Télécharger l\'application',
+        'app.order': 'Commander un logiciel sur mesure',
+        'app.price': 'Développement clé en main — à partir de 50 000 ₽',
         'nav.services': 'Services', 'nav.packages': 'Forfaits', 'nav.cases': 'Réalisations', 'nav.reviews': 'Avis', 'nav.process': 'Processus', 'nav.faq': 'FAQ', 'nav.cta': 'Discuter du projet',
         'hero.pill': 'Disponible pour de nouveaux projets', 'hero.title1': 'Je crée des sites et bots Telegram', 'hero.title2': 'clé en main en 1,5 jour',
         'hero.sub': 'TPF Studio — développement solo de l\'idée au lancement. Sans intermédiaires, dans les délais, garanti.', 'hero.btn1': 'Discuter du projet', 'hero.btn2': 'Voir les réalisations',
@@ -539,6 +584,15 @@
         'footer.slogan': 'Sites et bots Telegram clé en main en 1,5 jour.', 'footer.author': 'Vladislav', 'footer.up': 'En haut ↑'
       },
       es: {
+        'nav.app': 'App',
+        'app.title': 'TPF Studio ahora en una ventana independiente',
+        'app.sub': 'No me limito al navegador. Ahora creo aplicaciones de escritorio completas para Windows que son ultrarrápidas, funcionan sin conexión y se ven nativas.',
+        'app.f1': 'Modo sin conexión y datos locales',
+        'app.f2': 'Atajos de teclado e integración con el sistema',
+        'app.f3': 'Instalador rápido con un clic (.exe)',
+        'app.btn': 'Descargar aplicación',
+        'app.order': 'Pedir software personalizado',
+        'app.price': 'Desarrollo llave en mano — desde 50 000 ₽',
         'nav.services': 'Servicios', 'nav.packages': 'Paquetes', 'nav.cases': 'Proyectos', 'nav.reviews': 'Reseñas', 'nav.process': 'Cómo trabajo', 'nav.faq': 'FAQ', 'nav.cta': 'Discutir proyecto',
         'hero.pill': 'Disponible para nuevos proyectos', 'hero.title1': 'Creo sitios web y bots de Telegram', 'hero.title2': 'llave en mano en 1,5 días',
         'hero.sub': 'TPF Studio — desarrollo en solitario de la idea al lanzamiento. Sin intermediarios, a tiempo, con garantía.', 'hero.btn1': 'Discutir proyecto', 'hero.btn2': 'Ver proyectos',
@@ -569,6 +623,15 @@
         'footer.slogan': 'Sitios y bots de Telegram llave en mano en 1,5 días.', 'footer.author': 'Vladislav', 'footer.up': 'Arriba ↑'
       },
       tr: {
+        'nav.app': 'Uygulama',
+        'app.title': 'TPF Studio artık ayrı bir pencerede',
+        'app.sub': 'Kendimi tarayıcıyla sınırlamıyorum. Artık yıldırım hızında çalışan, çevrimdışı çalışan ve yerel görünen tam teşekküllü Windows masaüstü uygulamaları geliştiriyorum.',
+        'app.f1': 'Çevrimdışı mod ve yerel veriler',
+        'app.f2': 'Kısayol tuşları ve sistem entegrasyonu',
+        'app.f3': 'Tek tıkla hızlı kurulum (.exe)',
+        'app.btn': 'Uygulamayı İndir',
+        'app.order': 'Özel yazılım sipariş et',
+        'app.price': 'Anahtar teslim geliştirme — 50 000 ₽\'den',
         'nav.services': 'Hizmetler', 'nav.packages': 'Paketler', 'nav.cases': 'Projeler', 'nav.reviews': 'Yorumlar', 'nav.process': 'Nasıl çalışırım', 'nav.faq': 'SSS', 'nav.cta': 'Projeyi görüşelim',
         'hero.pill': 'Yeni projelere açık', 'hero.title1': 'Web siteleri ve Telegram botları yapıyorum', 'hero.title2': '1,5 günde anahtar teslim',
         'hero.sub': 'TPF Studio — fikirden lansmana solo geliştirme. Aracısız, zamanında, garantili.', 'hero.btn1': 'Projeyi görüşelim', 'hero.btn2': 'Projeleri gör',
@@ -599,6 +662,15 @@
         'footer.slogan': 'Web siteleri ve Telegram botları 1,5 günde anahtar teslim.', 'footer.author': 'Vladislav', 'footer.up': 'Yukarı ↑'
       },
       zh: {
+        'nav.app': '应用',
+        'app.title': 'TPF Studio 现已推出独立应用',
+        'app.sub': '我不局限于浏览器。现在我可以构建速度极快、支持离线且外观原生的全功能 Windows 桌面应用程序。',
+        'app.f1': '离线模式和本地数据',
+        'app.f2': '快捷键和系统集成',
+        'app.f3': '一键快速安装程序 (.exe)',
+        'app.btn': '下载应用',
+        'app.order': '定制软件',
+        'app.price': '交钥匙开发 — 起 50 000 ₽',
         'nav.services': '服务', 'nav.packages': '套餐', 'nav.cases': '案例', 'nav.reviews': '评价', 'nav.process': '工作流程', 'nav.faq': 'FAQ', 'nav.cta': '讨论项目',
         'hero.pill': '可接新项目', 'hero.title1': '我制作网站和 Telegram 机器人', 'hero.title2': '1.5 天交钥匙',
         'hero.sub': 'TPF Studio — 从创意到上线的独立开发。没有中间商，按时交付，有保障。', 'hero.btn1': '讨论项目', 'hero.btn2': '查看案例',
@@ -629,6 +701,15 @@
         'footer.slogan': '网站和 Telegram 机器人 1.5 天交钥匙。', 'footer.author': '弗拉迪斯拉夫', 'footer.up': '回到顶部 ↑'
       },
       ja: {
+        'nav.app': 'アプリ',
+        'app.title': 'TPF Studio が独立したアプリになりました',
+        'app.sub': 'ブラウザだけにとどまりません。今では、超高速でオフラインでも動作し、ネイティブな見た目の本格的な Windows デスクトップアプリケーションを構築しています。',
+        'app.f1': 'オフラインモードとローカルデータ',
+        'app.f2': 'ホットキーとシステム統合',
+        'app.f3': 'ワンクリックの高速インストーラー (.exe)',
+        'app.btn': 'アプリをダウンロード',
+        'app.order': 'カスタムソフトウェアを注文',
+        'app.price': 'ターンキー開発 — 50 000 ₽〜',
         'nav.services': 'サービス', 'nav.packages': 'パッケージ', 'nav.cases': '実績', 'nav.reviews': 'レビュー', 'nav.process': '進め方', 'nav.faq': 'FAQ', 'nav.cta': 'プロジェクト相談',
         'hero.pill': '新規プロジェクト受付中', 'hero.title1': 'ウェブサイトと Telegram ボットを作ります', 'hero.title2': '1.5 日でターンキー',
         'hero.sub': 'TPF Studio — アイデアから公開までのソロ開発。中間業者なし、納期厳守、保証付き。', 'hero.btn1': 'プロジェクト相談', 'hero.btn2': '実績を見る',
@@ -659,6 +740,15 @@
         'footer.slogan': 'ウェブサイトと Telegram ボットを 1.5 日でターンキー。', 'footer.author': 'ウラジスラフ', 'footer.up': '上へ ↑'
       },
       ko: {
+        'nav.app': '앱',
+        'app.title': 'TPF Studio가 이제 독립형 앱으로 제공됩니다',
+        'app.sub': '저는 브라우저에 국한되지 않습니다. 이제 매우 빠르고 오프라인에서 작동하며 네이티브처럼 보이는 완전한 Windows 데스크톱 애플리케이션을 구축합니다.',
+        'app.f1': '오프라인 모드 및 로컬 데이터',
+        'app.f2': '단축키 및 시스템 통합',
+        'app.f3': '빠른 원클릭 설치 프로그램 (.exe)',
+        'app.btn': '앱 다운로드',
+        'app.order': '맞춤 소프트웨어 주문',
+        'app.price': '턴키 개발 — 50 000 ₽부터',
         'nav.services': '서비스', 'nav.packages': '패키지', 'nav.cases': '포트폴리오', 'nav.reviews': '리뷰', 'nav.process': '작업 방식', 'nav.faq': 'FAQ', 'nav.cta': '프로젝트 논의',
         'hero.pill': '새 프로젝트 가능', 'hero.title1': '웹사이트와 Telegram 봇을 만듭니다', 'hero.title2': '1.5일 만에 턴키',
         'hero.sub': 'TPF Studio — 아이디어부터 출시까지 솔로 개발. 중간상인 없이, 정시에, 보장과 함께.', 'hero.btn1': '프로젝트 논의', 'hero.btn2': '포트폴리오 보기',
